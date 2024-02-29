@@ -112,7 +112,7 @@ export default class InsProductWindow extends Vue {
   border: 1px solid #f0f0f0;
   border-radius: 3px;
   box-sizing: border-box;
-  margin-bottom: 30px;
+  margin-bottom: 1rem;
   .fav {
     position: absolute;
        width: 23px;
@@ -141,23 +141,23 @@ export default class InsProductWindow extends Vue {
   border: 1px solid black !important;
 }
 .in_pdWindow_item_title {
-  height: 60px;
-    font-size: 20px;
+  height: 3rem;
+  background-color: #de2910;
+    font-size: 1.2rem;
     font-weight: bold;
     width: 100%;
     margin: 0 auto;
     text-align: center;
-    color: #2f4858;
-    line-height: 60px;
+    color: #fff;
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
+    display: flex;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     word-break: break-word;
     // display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 15px;
+      padding: 0 10px;
       box-sizing: border-box;
     // margin-top: .5rem;
     // margin-bottom: .5rem;

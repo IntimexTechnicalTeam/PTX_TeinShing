@@ -19,6 +19,12 @@ export default class App extends Vue {
   }
 
   mounted() {
+    this.$nextTick(() => {
+      if (this.$Storage.get('locale') === 'E') {
+        var element = document.body;
+        element.className = 'locale';
+      }
+    });
     Vue.prototype.$ShowLayer();
     setTimeout(() => {
       Vue.prototype.$HiddenLayer();

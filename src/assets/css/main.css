@@ -28,8 +28,12 @@ a {
 }
 
 body {
-    font-family: '微软雅黑';
+    font-family: 'Arial', 'Microsoft YaHei';
     overflow-x: hidden!important;
+}
+
+body.locale {
+    font-family: 'Arial' !important;
 }
 
 .clear {

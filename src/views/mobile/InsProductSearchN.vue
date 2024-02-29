@@ -1,18 +1,42 @@
 <template>
-  <div id="container" class="ProductSearch  NomralBg">
+  <div id="container" class="ProductSearch  NomralBg" :class="{'ENG':$Storage.get('locale') === 'E'}">
 <!--     <div class="NsMain"  v-if="isPtx">
         <advancedSearch :attrType="2"  @advancedChange="advancedChange" />
     </div> -->
     <div class="NsMain">
-        <div class="SearchSlide">
-          <div class="leftSide">
-            <NsadvancedSearch @advancedChange="advancedChange" v-if="isAdvanced"  @closeSub="closeSub" @resetAll="resetAll" />
+      <div class="selectBar">
+        <div class="selectBarbox">
+          <!-- <div class="showSearch" @click="showSearchSlide">
+            <b>{{$t('Cms.BigSales')}}</b>
+            <span class="filterIcon"></span>
+          </div> -->
+          <div class="SearchSlide">
+            <div class="leftSide">
+              <NsadvancedSearch @advancedChange="advancedChange" v-if="isAdvanced"  @closeSub="closeSub" @resetAll="resetAll" />
+            </div>
           </div>
         </div>
+      </div>
       <div class="selectBar">
-          <ul>
-            <li @click="showSearchSlide"><span class="filterIcon"></span><b>{{$t('product.Screening')}}</b></li>
-            <li  class="sortBox">
+        <div class="prolisttext" v-if="$Storage.get('locale') === 'C' || $Storage.get('locale') === 'S'">
+          <p>{{$t('product.Detailedinformation1')}}</p>
+          <p>{{$t('product.Detailedinformation2')}} {{ProductTotalRecord}}{{$t('product.Quantityproduct1')}}</p>
+          <p class="red">
+            <router-link to="/Account/login">{{$t("Message.LoginNow")}}</router-link>，{{$t('product.Quantityproduct2')}}
+          </p>
+          <p>{{$t("home.Search")}} {{ProductTotalPage}}-{{ProductTotalRecord}} {{$t("product.TotalNum")}} {{ProductTotalRecord}}</p>
+        </div>
+        <div class="prolisttext" v-else>
+          <p>{{$t('product.Detailedinformation1')}}</p>
+          <p>{{ProductTotalRecord}} {{$t('product.Detailedinformation2')}}</p>
+          <p class="red">
+            <router-link to="/Account/login">{{$t("Message.LoginNow")}}</router-link>{{$t('product.Quantityproduct2')}}
+          </p>
+          <p>{{$t("home.Search")}} {{ProductTotalPage}}-{{ProductTotalRecord}} {{$t("product.TotalNum")}} {{ProductTotalRecord}}</p>
+        </div>
+  <!-- <ul> -->
+            <!-- <li @click="showSearchSlide"><span class="filterIcon"></span><b>{{$t('product.Screening')}}</b></li> -->
+            <!-- <li  class="sortBox">
               <p class="sortTitle" @click.stop="showList=!showList">
                 {{$t('product.SortBy')}}
                 <i class="el-icon-arrow-down el-icon--right"></i>
@@ -23,8 +47,8 @@
                   <li @click="handleCommand('asc')" :style="{'color':command=='asc'?'#b19162':'#333333'}">{{$t('product.PriceLH')}}</li>
                 </ul>
               </transition>
-            </li>
-             <li  class="sortBox liTop" @click.stop="ShowSellType=!ShowSellType">
+            </li> -->
+             <!-- <li  class="sortBox liTop" @click.stop="ShowSellType=!ShowSellType">
               <p class="sortTitle">
                 {{$t('Enquiry.SellType')}}
                 <i class="el-icon-arrow-down el-icon--right"></i>
@@ -36,8 +60,8 @@
                   <li @click="handleSellType(2)" :style="{'color':SellType==2?'#b19162':'#333333'}">{{$t('Enquiry.Bargaining')}}</li>
                 </ul>
               </transition>
-            </li>
-          </ul>
+            </li> -->
+          <!-- </ul> -->
         </div>
     </div>
     <div class="prolist-box">
@@ -91,7 +115,9 @@ export default class InsProductSearch extends Vue {
   command:string='';
   SortName:string = '';
   SellType:number=0;
-  ShowSellType:boolean =false
+  ShowSellType:boolean =false;
+  ProductTotalPage: string='';
+  ProductTotalRecord: string='';
   get isPtx () {
       if (localStorage.getItem('isPtx') === '0') {
         return false;
@@ -157,6 +183,8 @@ export default class InsProductSearch extends Vue {
           this.proList = result.YouWouldLike;
           this.totalRecord = result.TotalRecord;
           this.$HiddenLayer();
+          this.ProductTotalPage = result.TotalPage;
+          this.ProductTotalRecord = result.TotalRecord;
         });
     }, 500);
   }
@@ -186,13 +214,16 @@ export default class InsProductSearch extends Vue {
   closeSub () {
     $('.SearchSlide').fadeOut();
     $('.leftSide').removeClass('closeBar');
-    document.body.style.overflow = 'auto';
+    // document.body.style.overflow = 'auto';
+  }
+  closeDialog () {
+    this.closeSub();
   }
   // 打开筛选弹窗
   showSearchSlide () {
     $('.SearchSlide').fadeIn();
     $('.leftSide').addClass('closeBar');
-    document.body.style.overflow = 'hidden';
+    // document.body.style.overflow = 'hidden';
   }
   loading (e) {
     if (this.tips) {
@@ -252,7 +283,7 @@ export default class InsProductSearch extends Vue {
 .NsMain {
   width: 100%;
   display: inline-block;
-  padding-top: 2rem;
+  padding-top: 2.5rem;
 }
 .sortBox{
   position: relative;
@@ -362,83 +393,226 @@ export default class InsProductSearch extends Vue {
     margin: 1rem 0 2rem;
 }
 
+// .SearchSlide{
+//   width: 100%;
+//   position: fixed;
+//   left: 0;
+//   top: 0px;
+//   bottom: 0px;
+//   background: rgba(0,0,0,.7);
+//   overflow-x: auto;
+//   z-index: 999999;
+//   display: none;
+//   .leftSide{
+//     width: 70%;
+//     left:-70%;
+//     min-height: 100%;
+//     position: absolute;
+//     transition: all .5s;
+//     background: #f2f1f0;
+//     border-top-right-radius: 1rem;
+//   }
+
+// }
 .SearchSlide{
   width: 100%;
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0px;
   bottom: 0px;
-  background: rgba(0,0,0,.7);
-  overflow-x: auto;
-  z-index: 999999;
-  display: none;
+  background: #fff;
+  // overflow-x: scroll;
+  z-index: 999;
+  display: block;
+
   .leftSide{
-    width: 70%;
-    left:-70%;
+    width: 100%;
+    top:0;
     min-height: 100%;
     position: absolute;
-    transition: all .5s;
-    background: #f2f1f0;
-    border-top-right-radius: 1rem;
+    transition: all 0s;
+    // box-shadow: 0 2px 5px #d1d1d1;
+    // border-radius: 10px;
+    // overflow: hidden;
+    background-color: #fff;
+
+      &::before{
+        content: "";
+        width: 4.5rem;
+        height: 4.5rem;
+        background: url(/images/mobile/product_logo1.png) no-repeat;
+        position: absolute;
+        left: 1.5rem;
+        top: -0.5rem;
+        z-index: 1;
+        background-size: contain;
+      }
+      &::after{
+        content: "";
+        width: 2.5rem;
+        height: 2.5rem;
+        background: url(/images/mobile/product_logo2.png) no-repeat;
+        position: absolute;
+        right: 2rem;
+        top: 0.5rem;
+        background-size: contain;
+      }
   }
 
 }
 .closeBar{
     left: 0%!important;
   }
+// .selectBar{
+//     width: 100%;
+//     margin: 0 auto;
+//     display: inline-block;
+//     margin-top: 2rem;
+//   > ul{
+//     width: 95%;
+//     margin: 0 auto;
+//   > li{
+//     float: left;
+//     margin-right: 3%;
+//     width: 30%;
+//     background: #FFF;
+//     font-size: 1.4rem;
+//     background: #333;
+//     background-size: 100% 100%;
+//     color: #FFF;
+//     height: 4rem;
+//     line-height: 4rem;
+//     list-style: none;
+//     span{
+//     width: 20%;
+//     display: inline-block;
+//     font-size: 1.4rem;
+//     text-align: center;
+//     }
+//     b{
+//       width: 60%;
+//       display: inline-block;
+//       text-align: center;
+//       font-size: 1.4rem;
+//       font-weight: 500;
+//       color: #fff;
+//     }
+//     select{
+//     width: 100%;
+//     border: none;
+//     padding-left: .5rem;
+//     height: 3.5rem;
+//     line-height: 3.5rem;
+//     font-size: 1.2rem;
+//     -webkit-appearance: none;
+//     -moz-appearance: none;
+//     appearance: none;
+//     background: url(/images/mobile/ptx_30.png) 80% 15px no-repeat;
+//     background-size: 15px;
+//     outline: none;
+//     color: #fff;
+//     }
+//     &:last-child{
+//       margin-right: 0px!important;
+//     }
+//   }
+//   }
+// }
 .selectBar{
     width: 100%;
     margin: 0 auto;
-    display: inline-block;
-    margin-top: 2rem;
-  > ul{
-    width: 95%;
-    margin: 0 auto;
-  > li{
-    float: left;
-    margin-right: 3%;
-    width: 30%;
-    background: #FFF;
-    font-size: 1.4rem;
-    background: #333;
-    background-size: 100% 100%;
-    color: #FFF;
-    height: 4rem;
-    line-height: 4rem;
-    list-style: none;
-    span{
-    width: 20%;
-    display: inline-block;
-    font-size: 1.4rem;
-    text-align: center;
-    }
-    b{
-      width: 60%;
-      display: inline-block;
-      text-align: center;
-      font-size: 1.4rem;
-      font-weight: 500;
-      color: #fff;
-    }
-    select{
+    // display: inline-block;
+    // margin-top: 2rem;
+  ul{
     width: 100%;
-    border: none;
-    padding-left: .5rem;
-    height: 3.5rem;
-    line-height: 3.5rem;
-    font-size: 1.2rem;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: url(/images/mobile/ptx_30.png) 80% 15px no-repeat;
-    background-size: 15px;
-    outline: none;
-    color: #fff;
+    margin: 0 auto;
+  }
+  .prolisttext{
+    p{
+      text-align: center;
+      color: #999999;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
     }
-    &:last-child{
-      margin-right: 0px!important;
+    p.red{
+      color: #de2910;
+      a{
+        color: #de2910;
+        font-size: 1.2rem;
+        text-decoration: underline;
+      }
     }
   }
+  .selectBarbox{
+    // float: left;
+    width: 100%;
+    height: 3.5rem;
+    background-color: #de2910;
+    margin-bottom: 2rem;
+    position: relative;
+    border-radius: 2rem;
+    position: relative;
+
+    >.showSearch{
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      b{
+        font-size: 1.4rem;
+        color: #fff;
+        line-height: 3.5rem;
+        margin-right: 1rem;
+      }
+      .filterIcon{
+        width: 17px;
+        height: 10px;
+        background: url('/images/mobile/lang.png') no-repeat;
+      }
+    }
+
+    .show_Slide{
+      width: 100%;
+      background: #f2f2f2;
+      border:none;
+      color: #d09c51;
+      height: 3.5rem;
+      line-height: 3.5rem;
+      list-style: none;
+      border-radius: 10px;
+      span{
+      width: 20%;
+      display: inline-block;
+      font-size: 1.4rem;
+      text-align: center;
+      }
+      b{
+        width: calc(100% - 15px);
+        display: block;
+        text-align: left;
+        font-size: 1.4rem;
+        font-weight: bold;
+        padding-left: 1.5rem;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+}
+#container.ENG{
+  .prolisttext{
+
+    p.red{
+      color: #de2910;
+      font-size: 1.2rem;
+        text-decoration: underline;
+      a{
+        color: #de2910;
+        font-size: 1.2rem;
+        text-decoration: underline;
+      }
+    }
   }
 }
 </style>

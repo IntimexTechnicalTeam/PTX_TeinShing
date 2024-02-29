@@ -2,7 +2,7 @@
   <div class="page_warrper" :style="styla">
     <span class="last" :class="{ 'noClick': Page === 1 }" @click="current--">{{$t('CheckOut.Last')}} </span>
     <select v-model="current" class="selectPage">
-      <option v-for="(item,index) in T" :value ="index + 1" :key="index" >{{ $t('product.per') + ' ' + (index + 1) + ' ' + $t('product.page')}}</option>
+      <option v-for="(item,index) in T" :value ="index + 1" :key="index" >{{ $t('product.per') + '' + (index + 1) + '' + $t('product.page')}}</option>
     </select>
     <span class="pageing"> / {{$t('CheckOut.Total') + Math.ceil(this.total / this.pageNum) + $t('product.page')}} </span>
     <span class="next" :class="{ 'noClick': Page === T.length }" @click="current++">{{$t('CheckOut.Next')}} </span>
@@ -58,6 +58,7 @@ export default class InsPage extends Vue {
 <style scoped lang="less">
 .page_warrper {
   margin: 50px auto;
+  margin-top: 30px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -126,39 +127,42 @@ input[type="number"]{
   border-left: 1px solid @base_color;
 }
 .last,.next{
-  height: 2.3rem;
-  line-height: 2.3rem;
+  height: 34px;
+  line-height: 32px;
   cursor: pointer;
   display: inline-block;
   border: 1px solid @base_color;
-  margin:0 .5rem;
-  padding: 0 1rem;
+  margin:0 10px;
+  padding: 0 15px;
   font-size: 16px;
+  box-sizing: border-box;
 }
 .noClick{
-  color: black;
-  background: white;
+  color: @base_color;
+  // background: white;
   cursor: not-allowed;
   border: 1px solid @base_color;
-  line-height: 2.3rem;
+  line-height: 32px;
   display: inline-block;
   font-size: 16px;
 }
 .selectPage{
     border: 1px solid @base_color;
-    height: 2.45rem;
-    padding: 0 0.5rem;
+    height: 34px;
+    padding: 0 10px;
+    padding-right: 20px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     outline: 0;
-    background: @base_color;
-    color: #fff;
+    // background: @base_color;
+    color: @base_color;
     font-size: 16px;
 }
 .pageing{
-  letter-spacing: 2px;
+  // letter-spacing: 2px;
   margin-left: 5px;
   margin-right: 5px;
   font-size: 16px;
+  color: #999999;
 }
 </style>

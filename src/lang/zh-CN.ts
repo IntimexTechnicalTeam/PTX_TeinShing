@@ -48,7 +48,7 @@ export default {
     DeliveryTime: '送貨時段',
     DeliveryInstructions: '送貨指示',
     DeliveryMark: '預訂請預早⼀天，每天晚上10 點截單，套餐滿800 包市區送貨。10點前⼊數⽅可隔天送貨。',
-    All: '全部',
+    All: '所有產品',
     PlsAddPiUpAddr: '請添加相關自提地址信息！',
     NoneAddPiUpAddr: '查詢不到相關自提地址信息！',
     AdditionalDiscount: '額外折扣已生效',
@@ -161,7 +161,14 @@ export default {
     Unit: '單位',
     Filter: '篩選',
     ViewAll: '查看更多',
-    SortBy: '排序'
+    SortBy: '排序',
+    Detailedinformation1: '點擊產品查看詳細訊息和放大產品圖片',
+    Detailedinformation2: '符合您搜索要求的',
+    Quantityproduct1: '個產品',
+    Quantityproduct2: '查看12個以上產品',
+    Productname: '產品',
+    ProductCMS: '文章',
+    TotalNum: '共有'
   },
   Shoppingcart: {
     ShoppingcartTitle: '購物車',
@@ -479,7 +486,7 @@ export default {
     AboutUS: '關於我們',
     OurStores: '門市',
     BusinessHours: '營業時間',
-    BigSales: '熱銷產品',
+    BigSales: '產品中心',
     WhatNews: '今期流行',
     PlsChoose: '請點擊選擇您想要查看的內容：'
   },
@@ -515,7 +522,8 @@ export default {
     Activity: '活動',
     ViewMore: '查看更多 >',
     Corporateenvironment: '公司環境',
-    footercontact: '聯繫我們'
+    footercontact: '聯繫我們',
+    welcome: '歡迎光臨天成實業（香港）有限公司，我們將竭誠為您服務！'
   },
   Action: {
     ReturnHomePage: '返回首頁',
@@ -598,7 +606,7 @@ export default {
     Image: '產品圖像',
     ProductInformation: '產品資料',
     Quantity: '數量',
-    ProductCode: '產品編號',
+    ProductCode: '編號',
     ProductName: '產品名稱',
     OtherRequirement: '其他要求',
     DeliveryLeadTime: '送貨排程',
@@ -672,7 +680,7 @@ export default {
     Balance: '數量餘額',
     Norecord: '沒有任何紀錄 !',
     Pleaseselect: '請選擇要刪除的產品',
-    MinOrderQty: '最低訂貨量',
+    MinOrderQty: '最少訂貨量',
     Code: '編號',
     Type: '類型',
     AuthorizedSignature: '授權簽名',

@@ -1,5 +1,5 @@
 <template>
-<div class="productDetailWarper PcVersion NomralBg">
+<div class="productDetailWarper PcVersion NomralBg" :class="{'ENG':$Storage.get('locale') === 'E'}">
   <div v-if="this.Permission == 3" class="IsDetailshow">
      {{$t('messageTips.NoProduct')}}
   </div>
@@ -10,15 +10,15 @@
         <div class="next" @click="getGetProductDown()">{{$t('Message.Next')}}<i class="img"></i></div>
     </div>
     <div class="productDetail_main">
-      <inPreview style="width:50%" :imgList="ImgList" :pageNum="userAgent === 'mobile' ?  1 : 4" :ProductTitleName="ProductTitleName"></inPreview>
-      <div style="width:45%;margin-left:5%;float:right;">
-          <PkProductInfo :panelDetail.sync="PanelDetail"  :ProductSku="ProductCode" width="100%" :AddPrice="getNewsPrice" style="margin-bottom: 2rem;"></PkProductInfo>
+      <inPreview :imgList="ImgList" :ProductTitleName="ProductTitleName"></inPreview>
+      <div style="width:650px;float:right;">
+          <PkProductInfo :panelDetail.sync="PanelDetail"  :ProductSku="ProductCode" width="100%" :AddPrice="getNewsPrice" style="margin-bottom: 50px;"></PkProductInfo>
           <inPanel :panelDetail.sync="PanelDetail" :ProductSku="ProductCode" @getPrice="showPrice" width="100%"></inPanel>
       </div>
     </div>
     <div class="tab_warpper" v-if="PanelDetail.negotiable">
       <div class="tab_header">
-        <div class="detail_title">{{$t('product.ProductIntroduction')}}</div>
+        <div class="detail_title"><h1>{{$t('product.ProductIntroduction')}}</h1></div>
       </div>
       <div class="clear"></div>
       <div class="product_detail" v-html="Tabs.Detail" v-show="IsDetail && Tabs.Detail!=''"></div>
@@ -330,37 +330,64 @@ export default class InsProductDetail extends Vue {
           }
         }
       .detail_title{
-          width: 350px;
-          margin: 0 auto;
-          background: #b19162;
-          background-size: 100% 100%;
-          text-align: center;
-          font-size: 24px;
-          color: #fff;
-          height: 50px;
-          line-height: 50px;
+          height: 100px;
+      background: url(/images/pc/index_21.png) no-repeat center center;
+      position: relative;
+      text-align: center;
+      &::before{
+          content: '';
+          width: 502px;
+          height: 1px;
+          background-color: #e3e6e8;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        &::after{
+          content: '';
+          width: 502px;
+          height: 1px;
+          background-color: #e3e6e8;
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      h1{
+        line-height: 100px;
+        font-size: 32px;
+        font-weight: bold;
+        color: #2f4858;
+        position: relative;
+        letter-spacing: 2px;
+
       }
     }
+    }
     .product_detail{
-      padding: 1rem;
+      padding: 15px 0;
       display: block;
       clear: both;
       min-height: 300px;
-      border-radius: 5px;
-      font-size: 20px;
-      color:#333333;
+      // border-radius: 5px;
+      font-size: 18px;
+      color:#666666;
       h3 {
-        font-size: 20px;
-        color:#333333;
+        font-size: 18px;
+        color:#666666;
         font-weight: 500;
       }
       /deep/ p{
-        font-size: 20px;
-        color:#333333;
+        font-size: 18px;
+        color:#666666;
+        line-height: 32px;
      }
      /deep/ span{
-        font-size: 20px!important;
-        color:#333333;
+        font-size: 18px!important;
+        color:#666666;
+        text-wrap: wrap !important;
+        line-height: 32px;
      }
     }
   }
@@ -408,7 +435,23 @@ export default class InsProductDetail extends Vue {
   justify-content: space-between;
   margin-bottom: 1rem;
   margin-top: 1rem;
+  .prev ,.next{
+    padding: 5px 10px;
+    border: 1px solid #2f4858;
+    color: #2f4858;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    border-radius: 5px;
+    transition: all .3s;
+    cursor: pointer;
+    &:hover {
+      background: #2f4858;
+      color: #fff;
+    }
+  }
   .prev {
+    padding-right: 25px;
     .img {
       background: url('/images/mobile/pre.png') no-repeat center center;
       background-size: contain;
@@ -424,6 +467,7 @@ export default class InsProductDetail extends Vue {
     }
   }
   .next {
+    padding-left: 25px;
     .img {
       background: url('/images/mobile/next.png') no-repeat center center;
       background-size: contain;
@@ -438,19 +482,41 @@ export default class InsProductDetail extends Vue {
       }
     }
   }
-  .prev ,.next{
-    padding: 5px 10px;
-    border: 1px solid #cab597;
-    color: #cab597;
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-    border-radius: 5px;
-    transition: all .3s;
-    cursor: pointer;
-    &:hover {
-      background: #cab597;
-      color: #fff;
+
+}
+.PcVersion.ENG{
+  .ProductUp {
+    .next, .prev{
+      width: 128px;
+    }
+  }
+  .tab_warpper{
+    .tab_header{
+      .detail_title{
+        h1{
+          font-size: 36px;
+          letter-spacing: 0;
+        }
+        &::after{
+          content: '';
+          width: 395px;
+        }
+        &::before{
+          content: '';
+          width: 395px;
+        }
+      }
+    }
+  }
+  /deep/ .productInfo {
+    .TitleBg span{
+      width: 180px;
+    }
+  }
+  /deep/ .in_panel_footer{
+    .CartBtn{
+      letter-spacing: 3px;
+      font-size: 24px;
     }
   }
 }

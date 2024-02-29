@@ -1,15 +1,19 @@
 <template>
   <div class="productBox">
-     <div class="TitleBg"><div class="innerBox">{{$t('Cms.BigSales')}}</div></div>
-    <div class="swiper-container swiper-container-hot">
-        <swiper :options="swiperOption" ref="mySwiper">
-        <!-- slides -->
+    <div class="TitleBg">
+      <div class="innerBox">{{$t('Cms.BigSales')}}</div>
+    </div>
+    <div class="swiper-container swiper-container-hot fix">
+        <!-- <swiper :options="swiperOptionhot" ref="mySwiper">
         <swiperSlide v-for="(slide, index) in hotProducts" :key="index">
            <inProductWindow :item="slide"  style="width:100%;" class="insProductHot"></inProductWindow>
         </swiperSlide>
-        <div class="swiper-scrollbar"   slot="scrollbar"></div>
-        </swiper>
-
+        </swiper> -->
+      <ul>
+        <li v-for="(slide, index) in hotProducts" :key="index">
+          <inProductWindow :item="slide"  style="width:100%;" class="insProductHot"></inProductWindow>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -27,25 +31,19 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper/src';
 export default class PkHotProduct extends Vue {
     hotProducts:any[]=[];
     bannerImg: string = '';
-    swiperOption: object = {
+    swiperOptionhot: object = {
       pagination: {
-        el: '.swiper-pagination',
+        el: '.swiper-pagination.swiper-paginationhot',
         clickable: true
       },
-      scrollbar: {
-        el: '.swiper-scrollbar'
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      },
-      slidesPerView: 2
+      slidesPerView: 2,
+      spaceBetween: 10
     };
     loadHotProducts () {
       var page = 'Home';
       this.$Api.promotion.getPromotion('Home', 4).then((result) => {
         if (result.Promotion.PrmtProductList.length > 0) {
-          this.hotProducts = result.Promotion.PrmtProductList.slice(0, 8);
+          this.hotProducts = result.Promotion.PrmtProductList.slice(0, 6);
         }
       });
     }
@@ -75,27 +73,43 @@ export default class PkHotProduct extends Vue {
 </style>
 <style lang="less" scoped>
 .TitleBg{
-  width: 90%;
-  height: 5rem;
-  border:1px solid #4d4d4d;
-  margin: 0 auto;
-  padding: .5rem;
-  margin-bottom: 2rem;
-  .innerBox{
-    width: 100%;
-    height: 100%;
-    background:#4d4d4d;
-    color: #FFF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    font-weight: 700;
-    font-family: 'Arial';
-  }
+  height: 7rem;
+      background: url(/images/pc/index_21.png) no-repeat center center;
+      position: relative;
+      background-size: contain;
+      text-align: center;
+      &::before{
+          content: '';
+          width: 30%;
+          height: 1px;
+          background-color: #e3e6e8;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        &::after{
+          content: '';
+          width: 30%;
+          height: 1px;
+          background-color: #e3e6e8;
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      .innerBox{
+        line-height: 7rem;
+        font-size: 2rem;
+        font-weight: bold;
+        color: #2f4858;
+        position: relative;
+        letter-spacing: 2px;
+        text-align: center;
+      }
 }
 .productBox {
-  margin-top: 3rem;
+  // margin-top: 3rem;
 }
 .productBox a{
     text-decoration: none;
@@ -125,10 +139,11 @@ export default class PkHotProduct extends Vue {
     }
 }
 .productBox .swiper-container {
-  height: 22rem;
+  // height: 22rem;
+  margin-top: 2rem;
 }
 .productBox .swiper-wrapper {
-  height: 22rem;
+  // height: 22rem;
 }
 .productBox_title {
     font-size: 2.4rem;
@@ -151,5 +166,16 @@ export default class PkHotProduct extends Vue {
     display: block;
     border: 1px solid #000;
     border-radius: 10px;
+}
+.swiper-container-hot{
+  ul{
+    li{
+      float: left;
+      width: 48%;
+      &:nth-child(2n){
+        float: right;
+      }
+    }
+  }
 }
 </style>

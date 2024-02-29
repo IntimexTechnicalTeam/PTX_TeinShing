@@ -1,21 +1,41 @@
 <template>
-    <div class="CatMain NoramlPaddingTop">
-      <transition name="slide">
+    <div class="CatMain">
+      <!-- <transition name="slide">
         <div key="1" v-if="!waiting" style="display:flex;">
            <div class="DetailTitle"><img :src="BannerImg" v-show="BannerImg!==null"><div class="TitleBg"><div class="innerBoxText">{{CateName}}</div></div></div>
       </div>
       </transition>
       <transition name="slide">
         <div class="faker" key="2" v-if="waiting" v-loading="true"></div>
-      </transition>
+      </transition> -->
         <div class="NomralBg">
-            <p class="PathData"><router-link to="/" class="HomePath">{{$t('Message.HomeTips')}}</router-link><i class="el-icon-arrow-right"></i><span class="currentTitle">{{CateName}}</span></p>
-            <div class="cms-list">
-                <div class="perData" v-for="(v,index) in ListData" :key="index" >
-                     <div class="Title"><div class="InnerBg" @click="goClick(index)" :class="'perList'+index"><span>{{v.Title}}</span><i class="Icon IconA"></i></div></div>
-                     <p v-html="v.Body" class="Content" :class="'show'+index"></p>
-                </div>
-            </div>
+          <div class="TabData">
+            <ul>
+              <li v-for="(tabs,index1) in TabData.Children" :key="index1">
+                <router-link :to="'/cms/catDetail/'+tabs.Id">
+                  {{tabs.Name}}
+                </router-link>
+              </li>
+            </ul>
+          </div>
+          <p class="PathData">
+            <router-link to="/" class="HomePath">{{$t('Message.HomeTips')}}</router-link>
+            <ul>
+              <li v-for="(path,index) in CateName.CatPaths" :key="index">
+                <i class="el-icon-arrow-right"></i><span class="currentTitle">{{path.PathName}}</span>
+              </li>
+            </ul>
+            <!-- <router-link to="/" class="HomePath">{{$t('Message.HomeTips')}}</router-link><i class="el-icon-arrow-right"></i><span class="currentTitle">{{CateName}}</span> -->
+          </p>
+          <div class="cms-list">
+            <div class="text">
+                <div v-html="Content"></div>
+              </div>
+              <!-- <div class="perData" v-for="(v,index) in ListData" :key="index" >
+                    <div class="Title"><div class="InnerBg" @click="goClick(index)" :class="'perList'+index"><span>{{v.Title}}</span><i class="Icon IconA"></i></div></div>
+                    <p v-html="v.Body" class="Content" :class="'show'+index"></p>
+              </div> -->
+          </div>
         </div>
     </div>
 </template>
@@ -34,6 +54,8 @@ export default class InsCatLayout1 extends Vue {
     ListData:any[]=[];
     BannerImg:string='';
     CateName:string='';
+    TabData:any[]=[];
+    Content: string='';
     private waiting: boolean = true;
     ActiveIndex:number=-1;
     NoImg:string='/images/pc/proddef.jpg';
@@ -65,8 +87,21 @@ export default class InsCatLayout1 extends Vue {
     this.$Api.cms.getCategoryByDevice({ CatId: this.cid, IsMobile: true }).then(async (result) => {
      console.log(result, 'gggggggg');
      this.BannerImg = result.ImagePath;
-     this.CateName = result.Name;
+     this.CateName = result;
+     this.Content = result.Content;
+     this.getArgument(result.CatPaths[0].CatId);
       this.waiting = false;
+    }).catch((error) => {
+      console.log(error, 'error');
+      this.$message({
+        message: error,
+        type: 'error'
+      });
+    });
+  }
+  getArgument(v) {
+    this.$Api.cms.getCategoryByDevice({ CatId: v, IsMobile: true }).then(async (result) => {
+      this.TabData = result;
     }).catch((error) => {
       console.log(error, 'error');
       this.$message({
@@ -101,9 +136,12 @@ export default class InsCatLayout1 extends Vue {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    padding-top: 1rem;
+  margin-bottom: 3rem;
 }
 .NomralBg {
   padding-top: 1rem;
+  margin-bottom: 3rem;
 }
 .PathData {
   width: 90%;
@@ -114,13 +152,53 @@ export default class InsCatLayout1 extends Vue {
   margin-bottom: 1rem;
   margin-top: 1rem;
   span,a,i{
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
   .HomePath {
     color: #666;
   }
   .currentTitle {
-    color:#9f1e3c;
+    color:#666;
+  }
+  ul{
+    display: flex;
+    align-items: center;
+    li:last-child{
+      span{
+        color: #de2910;
+      }
+    }
+  }
+}
+.TabData{
+  width: 90%;
+  margin: 0 auto;
+
+  ul{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    li{
+      a{
+        border-radius: 3px;
+        border: 1px solid #e6e6e6;
+        padding: 0.8rem 1rem;
+        box-sizing: border-box;
+        margin-right: 0.8rem;
+        margin-bottom: 0.8rem;
+        color: #666666;
+        display: block;
+      }
+      /deep/ .router-link-active{
+        color: #de2910;
+        border: 1px solid #de2910;
+      }
+      &:last-child{
+        a{
+          margin-right: 0;
+        }
+      }
+    }
   }
 }
 .DetailTitle{
@@ -168,6 +246,7 @@ export default class InsCatLayout1 extends Vue {
     display: flex;
     flex-wrap: wrap;
     margin-top: 1rem;
+    justify-content: center;
     .perData {
         width:100%;
         display:flex;
@@ -239,5 +318,18 @@ export default class InsCatLayout1 extends Vue {
           }
         }
     }
+    .text{
+    /deep/ p{
+      color: #666666;
+      font-size: 1.2rem;
+      line-height: 1.8rem;
+      text-align: justify;
+      img{
+        display: block;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
 }
 </style>

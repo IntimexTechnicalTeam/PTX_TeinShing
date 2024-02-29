@@ -130,29 +130,29 @@ input[type="number"]{
   border-left: 1px solid @base_color;
 }
 .last,.next{
-  height: 2.3rem;
-  line-height: 2.3rem;
+  height: 3rem;
+  line-height: 3rem;
   cursor: pointer;
   display: inline-block;
   border: 1px solid @base_color;
   margin:0 .5rem;
   padding: 0 1rem;
   font-size: 1.2rem;
+  box-sizing: border-box;
 }
 .noClick{
   color: black;
   background: white;
   cursor: not-allowed;
   border: 1px solid @base_color;
-  line-height: 2.3rem;
+  line-height: 3rem;
   display: inline-block;
   font-size: 1.2rem;
 }
 .selectPage{
     border: 1px solid @base_color;
-    height: 2.45rem;
+    height: 3rem;
     padding: 0 0.5rem;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     outline: 0;
     background: @base_color;
@@ -160,9 +160,10 @@ input[type="number"]{
     font-size: 1.2rem;
 }
 .pageing{
-  letter-spacing: 2px;
+  /* letter-spacing: 2px; */
   margin-left: 5px;
   margin-right: 5px;
   font-size: 1.2rem;
+  color: #999999;
 }
 </style>

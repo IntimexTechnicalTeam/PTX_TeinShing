@@ -1,10 +1,13 @@
 <template>
-    <li class="NsSearchItem">
-          <p class="category">
+    <li class="NsSearchItem" :class="{'ENG':$Storage.get('locale') === 'E'}">
+      <div class="title">
+        <p class="category">
           {{searchGroup.Name}}
-            <i class="el-icon-arrow-up"  @click="isOpen = !isOpen" v-if="!isOpen"></i>
-            <i class="el-icon-arrow-down" @click="isOpen = !isOpen" v-else></i>
+            <!-- <i class="el-icon-arrow-up"  @click="isOpen = !isOpen" v-if="!isOpen"></i>
+            <i class="el-icon-arrow-down" @click="isOpen = !isOpen" v-else></i> -->
         </p>
+      </div>
+
           <transition name="fade">
           <ul :class="{'open': isOpen}">
             <li class="viewall" :class="{'borderLine':isAll}">
@@ -12,7 +15,7 @@
                 <label :for="searchGroup.Name+'-All'" >{{$t('Message.All')}}</label>
             </li>
             <li v-for="(child, index2) in (searchType === 1 ? searchGroup.AttrValues : searchType === 2 ? searchGroup.Children : [])" :key="index2">
-                <input type="checkbox" :id="child.Name+index2" :value="child.Id" v-model="checkedValue" @click="selectAttr(searchGroup)"  style="display:none;">
+                <input type="checkbox" :id="child.Name+index2" :value="child.Id" v-model="checkedValue" @click="selectAttr(searchGroup)">
                 <label :for="child.Name+index2" @click="checkLi(index2)">{{child.Name}}</label>
             </li>
             <!-- <i class="el-icon-plus" @click="isOpen = !isOpen" v-if="!isOpen"></i>
@@ -109,33 +112,26 @@ export default class InsAdvancedSearch extends Vue {
       .colorstyle {
         color: @base_color;
       }
-      .borderLine {
-        border: 1px solid @base_color;
-       }
+
       .viewall {
-        border-radius: .5rem;
-        background: #fff;
-        margin-top: 1rem;
+        // border-radius: .5rem;
+        background: #f5f5f5;
+        // margin-top: 1rem;
+      }
+      .title{
+        width: 100%;
+        height: 70px;
+        background: url('/images/pc/producttitle.png') no-repeat;
+        text-align: center;
+        margin-bottom: 20px;
       }
       p.category {
-        width: 100%;
-        font-size: 22px;
-        color: #333333;
-        background-color: #FFF;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        justify-self: start;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -ms-flex-negative: 0;
-        flex-shrink: 0;
+        font-size: 20px;
+        color: #fff;
         position: relative;
-        height: 3.5rem;
-        line-height: 3.5rem;
-        border-radius: .3rem;
-        padding-top:10px;
+        line-height: 66px;
+        font-weight: bold;
+        padding-left: 20px;
         i{
           position: absolute;
           right: 0px;
@@ -152,40 +148,49 @@ export default class InsAdvancedSearch extends Vue {
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            background: #f2f1f0;
-            border-radius: .3rem;
-            margin-bottom: 1rem;
-            border:1px solid #f2f1f0;
+            background: #f5f5f5;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            // border:1px solid #f2f1f0;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
             input[type="checkbox"] {
-                width: 18px;
-                height: 18px;
-                background-color: #fff;
+                // width: 18px;
+                // height: 18px;
+                background-color: transparent;
                 -webkit-appearance:none;
-                border: 1px solid #cccccc;
+                border: none;
                 outline: none;
+                position: absolute;
+                left: 0;
+                top: 0;
             }
 
             input[type="checkbox"]:checked {
-                border: 1px solid #666666;
-                background-image: url('/images/mobile/checked.png'); /*复选框的背景图*/
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: auto;
+                width: 6px;
+                  height: 50px;
+                  background-color: #de2910;
+                  border-top-left-radius: 3px;
+                  border-bottom-left-radius: 3px;
+                  margin: 0;
 
                 &+label {
-                    color: @base_color;
+                    color: #de2910;
+
                 }
             }
 
             label {
-            font-size: 20px;
-            color: #666666;
+            font-size: 18px;
+            color: #808080;
             width: 90%;
             margin: 0 auto;
             cursor: pointer;
             height: 50px;
             line-height: 50px;
+            text-align: center;
+            overflow: hidden;
             }
         }
 
@@ -200,6 +205,22 @@ export default class InsAdvancedSearch extends Vue {
                 display: none;
                 transition: all 3s;
         }
+        .borderLine{
+        label{
+          color: #de2910 !important;
+        }
+        &::before {
+        content: '';
+        width: 6px;
+        height: 50px;
+        background-color: #de2910;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+       }
+      }
     }
 }
 .fade-enter-active, .fade-leave-active {
@@ -207,5 +228,16 @@ export default class InsAdvancedSearch extends Vue {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+.NsSearchItem.ENG{
+  >ul>li {
+    label{
+      font-size: 16px;
+      line-height: normal;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }
 </style>

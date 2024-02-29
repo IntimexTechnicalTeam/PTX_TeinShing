@@ -31,6 +31,10 @@
           <img :src="item.src" />
         </div>
       </div>
+      <div class="rightpart" v-if="this.$Settings.version !== 1">
+              <div class="in_pannel_addtofav"  v-if="!panelDetail.negotiable"><img :src="panelDetail.IsFavorite ? '/images/mobile/faved.png': '/images/mobile/unfav.png'" @click="addFavorite"/>{{$t('Message.Fav')}}</div>
+              <p class="HkProductShare"><HkProductShare/>{{$t("Action.Share")}}</p>
+            </div>
     </div>
 
     <!-- 购物模式 -->
@@ -65,7 +69,8 @@ import inButton from '@/components/base/pc/InsButton.vue';
 import inPrices from '@/components/base/pc/InsPrices.vue';
 import inRecommend from '@/components/business/pc/product/InsRecommend.vue';
 import ShopCartItem from '@/model/shopCartItem';
-@Component({ components: { inNum, inSelect, inButton, inPrices, inRecommend } })
+import HkProductShare from '@/components/hkTasteBusiness/pc/product/HkProductShare.vue';
+@Component({ components: { inNum, inSelect, inButton, inPrices, inRecommend, HkProductShare } })
 export default class Panel extends Vue {
   @Prop() private panelDetail!: PanelDetail;
   @Prop() private readonly width!: string;
@@ -308,22 +313,22 @@ export default class Panel extends Vue {
   right: 0px;
 }
 .PcVersion  .el-input-number__decrease,.PcVersion .el-input-number__increase{
-    width: 2rem !important;
+    width: 38px !important;
     top:0px!important;
     background: #f5f5f5;
     border-radius: 0px;
 }
 .PcVersion .el-input-number__decrease i, .el-input-number__increase i{
-  color:#666666;
+  color:#2f4858;
 }
 .PcVersion .el-input-number .el-input__inner{
   padding-left: 0rem;
   padding-right: 0rem;
   background: transparent!important;
-  width: 10rem;
-  color:#000!important;
+  width: 138px;
+  color:#2f4858!important;
   font-weight: 500;
-  font-size: 1.4rem;
+  font-size: 18px;
 }
 </style>
 <style lang="less" scoped>
@@ -331,9 +336,9 @@ export default class Panel extends Vue {
   display: block!important;
 }
 .productTips {
-  font-size: 1.2rem;
-  color: #9f1e3c;
-  margin-bottom: 1rem;
+  font-size: 18px;
+  color: #2f4858;
+  margin-bottom: 10px;
 }
 .MinOrderQty {
   margin-bottom: 20px;
@@ -367,6 +372,23 @@ export default class Panel extends Vue {
 }
 .in_panel_content {
   min-height: 70%;
+  display: flex;
+    justify-content: space-between;
+  .rightpart{
+      width: 23%;
+      float: right;
+      text-align: right;
+      font-size: 16px;
+      color: #2f4858;
+          display: flex;
+    align-items: center;
+    justify-content: right;
+  }
+  .HkProductShare{
+    display: flex;
+        height: 30px;
+    align-items: center;
+  }
 }
 .in_panel_footer {
   margin-top: 20px;
@@ -404,7 +426,7 @@ export default class Panel extends Vue {
   text-decoration: line-through;
 }
 .in_panel_iconList {
-  margin-top: 40px;
+  margin-top: 10px;
   text-align: left;
   display: flex;
   flex-wrap: nowrap;
@@ -422,9 +444,9 @@ export default class Panel extends Vue {
         color: #fff;
         border-radius: 3px;
         transition: .1s;
-        text-transform: uppercase;
+        text-transform: capitalize;
         background-color: unset;
-        background: #000;
+        background: #de2910;
         background-size: cover;
         width: 100%;
         border: 0px;

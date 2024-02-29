@@ -28,13 +28,13 @@
           </transition>
       </div>
     </div> -->
-    <div class="ProductSearch">
+    <div class="ProductSearch fix">
       <div class="SearchSlide">
         <div class="leftSide">
           <NsadvancedSearch @advancedChange="advancedChange" v-if="isAdvanced"  @closeSub="closeSub" @resetAll="resetAll" />
         </div>
       </div>
-      <div class="selectBar">
+      <!-- <div class="selectBar">
           <ul>
             <div class="left">
               <li @click="showSearchSlide" class="liTop"><span class="filterIcon"></span><b>{{$t('product.Screening')}}</b></li>
@@ -67,11 +67,27 @@
             </li>
             </div>
           </ul>
-        </div>
+        </div> -->
       <div class="NsProduct">
           <transition name="slide">
             <div key="1" v-if="!waiting">
               <div class="prolist-box" v-if="proList.length > 0">
+                <div class="prolisttext" v-if="$Storage.get('locale') === 'C' || $Storage.get('locale') === 'S'">
+                  <p>{{$t('product.Detailedinformation1')}}</p>
+                  <p>{{$t('product.Detailedinformation2')}} {{ProductTotalRecord}}{{$t('product.Quantityproduct1')}}</p>
+                  <p class="red">
+                    <router-link to="/Account/login">{{$t("Message.LoginNow")}}</router-link>，{{$t('product.Quantityproduct2')}}
+                  </p>
+                  <p>{{$t("home.Search")}} {{ProductTotalPage}}-{{ProductTotalRecord}} {{$t("product.TotalNum")}} {{ProductTotalRecord}}</p>
+                </div>
+                <div class="prolisttext" v-else>
+                  <p>{{$t('product.Detailedinformation1')}}</p>
+                  <p>{{ProductTotalRecord}} {{$t('product.Detailedinformation2')}}</p>
+                  <p class="red">
+                    <router-link to="/Account/login">{{$t("Message.LoginNow")}}</router-link>，{{$t('product.Quantityproduct2')}}
+                  </p>
+                  <p>{{$t("home.Search")}} {{ProductTotalPage}}-{{ProductTotalRecord}} {{$t("product.TotalNum")}} {{ProductTotalRecord}}</p>
+                </div>
                 <ins-productList :column="4" :allItems="proList" class="productPer" />
                   <div class="pager" v-if="totalRecord > pageSize">
                     <InsPage
@@ -118,7 +134,7 @@ import $ from 'jquery';
 export default class InsProductSearch extends Vue {
   proList: YouWouldLike[] = []; // 产品数据
   currentPage: number = 1; // 当前页
-  pageSize: number = 12; // 每页显示条目个数
+  pageSize: number = 9; // 每页显示条目个数
   totalRecord: number = 0; // 总条目数
   private tips: boolean = true;
   private LoadingInstance!: any;
@@ -133,7 +149,10 @@ export default class InsProductSearch extends Vue {
   SortName:string = '';
   private waiting: boolean = true;
   SellType:number=0;
-  ShowSellType:boolean =false
+  ShowSellType:boolean =false;
+  ProductTotalPage: string='';
+  ProductTotalRecord: string='';
+
   // 搜索关键词
   get searchKey() {
     let a = this.$route.params.key;
@@ -179,13 +198,13 @@ export default class InsProductSearch extends Vue {
   }
   // 关闭筛选弹窗
   closeSub() {
-    $('.SearchSlide').fadeOut();
+    // $('.SearchSlide').fadeOut();
     $('.leftSide').removeClass('closeBar');
     document.body.style.overflow = 'auto';
   }
   // 打开筛选弹窗
   showSearchSlide() {
-    $('.SearchSlide').fadeIn();
+    // $('.SearchSlide').fadeIn();
     $('.leftSide').addClass('closeBar');
     document.body.style.overflow = 'hidden';
   }
@@ -217,6 +236,8 @@ export default class InsProductSearch extends Vue {
           this.totalRecord = result.TotalRecord;
           this.waiting = false;
           this.$HiddenLayer();
+          this.ProductTotalPage = result.TotalPage;
+          this.ProductTotalRecord = result.TotalRecord;
         });
     }, 500);
   }
@@ -288,20 +309,47 @@ export default class InsProductSearch extends Vue {
   min-height: 700px;
 }
 .NsProduct {
-  width: 100%;
-  display: inline-block;
-  margin-top: 20px;
+  width: 940px;
+  float: right;
     /deep/ .products_container{
       .product_item {
-        width: 23%!important;
-        margin-right: 2.33%;
+        width: 300px!important;
+        margin-right: 20px;
+        border: 1px solid #f0f0f0;
+        border-radius: 3px;
         &:nth-child(3n) {
-          margin-right: 2.33%!important;
+          margin-right: 0!important;
         }
-        &:nth-child(4n) {
-          margin-right: 0px!important;
+        &:hover{
+          border: 1px solid #de2910;
+          .in_pdWindow_item_description{
+            background-color: #de2910;
+            color: #fff;
+            a{
+              color: #fff;
+            }
+          }
         }
       }
+  }
+  .prolisttext{
+    text-align: center;
+    margin-bottom: 15px;
+    p{
+      color: #999999;
+      font-size: 16px;
+      line-height: 28px;
+      &.red{
+        color: #de2910;
+        font-size: 16px;
+        line-height: 28px;
+        a{
+          color: #de2910;
+          font-size: 16px;
+          text-decoration: underline;
+        }
+      }
+    }
   }
 }
 .ProductTips {
@@ -372,23 +420,24 @@ export default class InsProductSearch extends Vue {
   }
 }
 .SearchSlide {
-  width: 100%;
-  position: fixed;
+  width: 240px;
+  float: left;
+  // position: fixed;
   left: 0;
   top: 0px;
   bottom: 0px;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 999999;
-  display: none;
+  // background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  display: block;
   .leftSide {
-    width: 20%;
-    left: -20%;
+    width: 100%;
+    // left: -20%;
     min-height: 100%;
-    position: absolute;
+    // position: absolute;
     transition: all 0.5s;
-    background: #f2f1f0;
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+    // background: #f2f1f0;
+    // border-top-right-radius: 1rem;
+    // border-bottom-right-radius: 1rem;
     overflow: hidden;
   }
 }

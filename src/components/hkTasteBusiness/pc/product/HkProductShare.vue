@@ -29,18 +29,20 @@ export default class HkProductShare extends Vue {
 <style lang="less" scoped>
 .productshare_icon_warpper {
   text-align: right;
-  display: inline-block;
+  display: block;
+  height: 30px;
 }
 .productshare_icon_warpper a {
-  display: inline-block;
-  margin-right: 0.5rem;
+  display: block;
+  margin-right: 10px;
 }
-.productshare_icon_warpper a:last-child {
-  margin-right: 0px !important;
-}
+// .productshare_icon_warpper a:last-child {
+//   margin-right: 0px !important;
+// }
 .productshare_icon_warpper img {
-  width: 25px;
-  margin-right: 5px;
+  width: 30px;
+  // margin-right: 5px;
   cursor: pointer;
+  display: block;
 }
 </style>

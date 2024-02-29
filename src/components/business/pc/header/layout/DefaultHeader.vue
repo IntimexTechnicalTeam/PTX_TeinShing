@@ -1,11 +1,11 @@
 <template>
 <div class="header-layout"  v-cloak>
-  <div class="headerBg">
+  <div class="headerBg" :class="{'ENG':$Storage.get('locale') === 'E'}">
       <div class="headerTop">
           <div class="inner fix">
             <div class="left">
               <p>
-                歡迎光臨天成實業（香港）有限公司，我們將竭誠為您服務！
+                {{$t("home.welcome")}}
               </p>
             </div>
             <div class="right">
@@ -35,17 +35,17 @@
               <!-- 我的喜爱结束 -->
               <!-- 会员登陆开始 -->
               <InsLogin class="memberLogin"></InsLogin>
-              <div class="cartTop" >
+              <!-- <div class="cartTop" >
                   <router-link to="/account/GetEnquiry">
                         <i class="handle-icon ptxicon"></i>
                   </router-link>
-              </div>
+              </div> -->
 
               <!-- 购物车开始 -->
               <!-- <Shopcart class="memberLogin"></Shopcart> -->
               <!-- 购物车结束 -->
               <!-- 切换语言开始 -->
-              <CodeSelect  />
+              <!-- <CodeSelect  /> -->
               <div class="langBox">
                   <InsLangSwitch></InsLangSwitch>
               </div>
@@ -57,7 +57,9 @@
         <div class="inner fix">
           <!-- logo开始 -->
           <div class="logoBox">
-              <a href="/"><img src="/images/pc/pcindex_09.png"></a>
+            <a href="/" v-if="$Storage.get('locale') === 'E'"><img src="/images/pc/pcindex_09eng.png"></a>
+            <a href="/" v-else><img src="/images/pc/pcindex_09.png"></a>
+
           </div>
           <!-- logo结束 -->
           <!-- 导航栏开始 -->
@@ -94,10 +96,10 @@ export default class DefaultHeader extends Vue {
 
   private typeList: any[] = [{
     value: 0,
-    label: '產品'
+    label: this.$t('product.Productname') + ''
   }, {
     value: 1,
-    label: '文章'
+    label: this.$t('product.ProductCMS') + ''
   }];
 
   private searchType: number = 0;
@@ -196,10 +198,12 @@ export default class DefaultHeader extends Vue {
   display: flex;
 }
 .headerBg{
-   width: 100%;
-   background:#fff;
-   background-size: cover;
-   display: block;
+  width: 100%;
+  background:#fff;
+  background-size: cover;
+  display: block;
+  position: relative;
+  z-index: 1000;
   //  box-shadow: 0 0 10px 0 #d4d5d1;
 }
 .headerTop{
@@ -212,6 +216,7 @@ export default class DefaultHeader extends Vue {
 .headerTop .inner{
     width: 1200px;
     margin: 0 auto;
+    // position: relative;
     .left{
       float: left;
       p{
@@ -236,6 +241,7 @@ export default class DefaultHeader extends Vue {
     z-index: 10;
   .inner{
     width: 1200px;
+    height: 100px;
     margin: 0 auto;
     position: relative;
     // display: flex;
@@ -356,7 +362,7 @@ export default class DefaultHeader extends Vue {
       > a {
         width: 100%;
         font-size: 18px;
-        color: #fff;
+        color: #d5dee4;
         display: block;
         text-align: center;
         font-weight: 500;
@@ -446,12 +452,13 @@ margin-right: 20px;
     }
 
     .el-input__icon {
-      line-height: 34px;
+      line-height: 26px;
       width: 18px;
       color: #2f4858;
+      // margin-top: -3px;
     }
     .el-input__suffix{
-      top: 2px;
+      top: 0;
     }
   }
 
@@ -485,6 +492,45 @@ margin-right: 20px;
       background-size: 100%;
       cursor: pointer;
       margin-right: 10px;
+    }
+  }
+}
+.header-layout .ENG{
+  .headerBottom {
+    /deep/ .header_menu{
+      width: 812px;
+      >ul{
+        display: block;
+        >li{
+          &:nth-child(4){
+            >a{
+              width: 120px;
+            }
+          }
+          >a{
+            text-transform: capitalize;
+            color: #d5dee4;
+          }
+          &:hover{
+            ul{
+              width: auto;
+              left: 20px;
+              white-space: nowrap;
+              li{
+                a{
+                  text-transform: capitalize;
+                  padding: 10px 10px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .search-box{
+    /deep/ .el-select{
+      width: 90px;
     }
   }
 }

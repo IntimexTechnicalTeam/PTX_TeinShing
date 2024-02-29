@@ -1,8 +1,8 @@
 export default {
   // Admin Id
-  AppId: '7f32fa38-6383-4f72-bf07-ed5aceeab81f',
+  AppId: 'CB68F68F-2EC1-4323-BFC0-8C86F84D1BDE',
   // api Authorization 身份認證，用於後端識別客戶端
-  Authorization: 'N2YzMmZhMzgtNjM4My00ZjcyLWJmMDctZWQ1YWNlZWFiODFmOjJjNjE3NGUxLTAwNDUtNDViNS04YWE3LTQ5NWMxMWYxZTkzYQ==',
+  Authorization: 'Q0I2OEY2OEYtMkVDMS00MzIzLUJGQzAtOEM4NkY4NEQxQkRFOjgzRkYwRThDLTYxQjctNDY3OS05RDIzLThDQzQ2RjcwMDA0OQ==',
 
   /* 網站基礎配置 */
   siteVersion: 3, // 網站版本[未完善] （1 => Plan A Startup Version 初創版, 2 => Plan B Enterprise Version 企業旗艦版, 3 => Plan C E-Commerce Version 品牌電商版）
@@ -16,11 +16,11 @@ export default {
   // 自定義語言列表 ps: 如有添加語言，請在目錄 /src/lang 下添加對應語言包文件和修改index.ts相關設置代碼
   langList: [
   {
-    name: '简',
+    name: '简体',
     value: 'S'
   },
   {
-    name: '繁',
+    name: '繁體',
     value: 'C'
   },
   {
@@ -34,7 +34,7 @@ export default {
   // 手機版側欄滑動菜單設置
   slideMenu: {
     direction: 'right', // 菜單滑出方向 => 默認值 'top', 可選值 'top', 'left', 'right'
-    width: '80%', // 菜單寬度 => 默認值'100%'，僅在position值為非'top'的情況生效
+    width: '100%', // 菜單寬度 => 默認值'100%'，僅在position值為非'top'的情況生效
     height: '100%', // 菜單高度 => 默認值'100%'，僅在position值為'top'的情況生效
     Embedded: true, // 菜單是否內嵌 => 默認值 false ，僅在position值為非'top'的情況生效
     maskBg: '#000', // 側欄菜單遮罩顏色

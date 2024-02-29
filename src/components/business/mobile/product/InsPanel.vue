@@ -326,7 +326,8 @@ export default class InsPanel extends Vue {
     background: #f5f5f5;
 }
 .mobileWarper .el-input-number__decrease i, .el-input-number__increase i{
-    color: #666666;
+    color: #2f4858;
+    font-weight: bold;
 }
 .mobileWarper .el-input-number .el-input__inner{
   padding-left: 0rem;
@@ -335,7 +336,7 @@ export default class InsPanel extends Vue {
   width: 10rem;
   line-height: 2rem!important;
   height: 2rem!important;
-  color:#000!important;
+  color:#2f4858!important;
   font-weight: 500;
   font-size: 1.4rem;
 }
@@ -394,12 +395,14 @@ export default class InsPanel extends Vue {
       justify-content: center;
       align-items: center;
       margin-bottom: 1rem;
-      background: #333;
+      background: #de2910;
       background-size:cover;
       width: 100%;
       color: #fff;
       margin-left: 0px!important;
-      border: 5px;
+      letter-spacing: 3px;
+      font-weight: bold;
+      border: none;
         &:disabled{
           cursor:not-allowed;
           background: #ccc;
@@ -507,7 +510,7 @@ export default class InsPanel extends Vue {
 }
 .productTips {
   font-size: 1.2rem;
-  color: #9f1e3c;
+  color: #2f4858;
   margin-bottom: 1rem;
 }
 .MinOrderQty {

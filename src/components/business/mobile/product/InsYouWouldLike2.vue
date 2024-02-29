@@ -1,11 +1,13 @@
 <template>
   <div :style="styla" v-if="ShowItemsLength > 0 ">
     <div class="productCat">
-          <p class="NoramlTitle"><span class="text">{{title}}</span></p>
+          <div class="NoramlTitle">
+            <h1>{{title}}</h1>
+          </div>
           <swiper  :options="SWproductCatOption" ref="mySwiper" v-if="InnerItems.length > 0">
             <!-- slides -->
             <swiper-slide v-for="(item, index) in InnerItems" :key="index">
-                  <inProductWindow :item="item" :imgStyla="imgStyla" styla="width:90%;margin:0 auto;padding-bottom:2rem;margin-bottom: 2rem;"></inProductWindow>
+                  <inProductWindow :item="item" :imgStyla="imgStyla" styla="width:100%;margin:0 auto;"></inProductWindow>
             </swiper-slide>
             <div class="swiper-pagination pwswiper" slot="pagination" v-if="SWproductCatOption.pagination"></div>
           </swiper>
@@ -36,7 +38,7 @@ export default class InsYouWouldLike2 extends Vue {
   // data
   SWproductCatOption = {
     slidesPerView: 2,
-    spaceBetween: 20,
+    spaceBetween: 15,
     pagination: {
       el: '.pwswiper',
       clickable: true
@@ -94,44 +96,82 @@ export default class InsYouWouldLike2 extends Vue {
   padding-top: 10px;
   padding-bottom:2rem;
 }
-  .NoramlTitle {
-    background: url('/images/mobile/ptx_14.png') no-repeat center center;
-    background-size: contain;
-    display: flex;
-    flex-wrap: wrap;
-    position: relative;
-    width: 60%;
-    height: 3rem;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
-    .text {
-      font-size: 1.6rem;
-      color: #fff;
-      padding-left: 3rem;
-      font-weight: 700;
+  // .NoramlTitle {
+  //   background: url('/images/mobile/ptx_14.png') no-repeat center center;
+  //   background-size: contain;
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   position: relative;
+  //   width: 60%;
+  //   height: 3rem;
+  //   margin: 0 auto;
+  //   justify-content: center;
+  //   align-items: center;
+  //   .text {
+  //     font-size: 1.6rem;
+  //     color: #fff;
+  //     padding-left: 3rem;
+  //     font-weight: 700;
+  //   }
+  // }
+  .NoramlTitle{
+      height: 7rem;
+      background: url(/images/pc/index_21.png) no-repeat center center;
+      position: relative;
+      background-size: contain;
+      &::before{
+          content: '';
+          width: 30%;
+          height: 1px;
+          background-color: #e3e6e8;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        &::after{
+          content: '';
+          width: 30%;
+          height: 1px;
+          background-color: #e3e6e8;
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      h1{
+        line-height: 7rem;
+        font-size: 2rem;
+        font-weight: bold;
+        color: #2f4858;
+        position: relative;
+        letter-spacing: 2px;
+        text-align: center;
+      }
     }
-  }
     .productCat {
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
+      width: 90%;
+      margin: 0 auto;
+      // display: flex;
+      // flex-wrap: wrap;
       padding-top: 2rem;
       padding-bottom: 2rem;
       /deep/ .swiper-container {
         padding-bottom: 3rem;
         padding-top: 2rem;
-        width: 90%;
+        width: 100%;
         margin: 0 auto;
         .swiper-pagination-bullet{
           width: 10px!important;
           height: 10px!important;
           background: #e6e6e6;
           opacity: 1;
+          // box-shadow: inset 1px 1px 2px #bebdbe;
         }
 
         .swiper-pagination-bullet-active{
-          background: #b19162!important;
+          background: #de2910!important;
+    // box-shadow: inset 1px 1px 2px #b93422;
         }
       }
     }

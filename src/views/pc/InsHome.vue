@@ -1,5 +1,5 @@
 <template>
-  <div class="home" v-cloak>
+  <div class="home" :class="{'ENG':$Storage.get('locale') === 'E'}" v-cloak>
     <HomeBanner :page="'Home'" />
     <HkOuradvantage/>
     <HkHomeAbout/>
@@ -84,5 +84,121 @@ export default class InsHome extends Vue {
 
 .ins-calendar {
   margin: 2rem auto;
+}
+.home.ENG{
+  /deep/ .liveBox_in{
+    >.title {
+    h1{
+      letter-spacing: 0;
+      font-size: 36px;
+    }
+    &::after{
+      content: '';
+      width: 404px;
+    }
+    &::before{
+      content: '';
+      width: 404px;
+    }
+
+  }
+  ul{
+    li{
+      .Desc{
+        padding: 0px 16px;
+      }
+    }
+  }
+  }
+  /deep/ .aboutBox{
+    .homeTitle{
+      >.title {
+        h1{
+          letter-spacing: 0;
+          font-size: 36px;
+        }
+        &::after{
+          content: '';
+          width: 490px;
+        }
+        &::before{
+          content: '';
+          width: 490px;
+        }
+
+      }
+    }
+  }
+  /deep/ .liveBox{
+    .liveBox_in{
+      >.title {
+        h1{
+          letter-spacing: 0;
+          font-size: 36px;
+        }
+        &::after{
+          content: '';
+          width: 405px;
+        }
+        &::before{
+          content: '';
+          width: 405px;
+        }
+
+      }
+    }
+  }
+  /deep/ .news{
+    >.title {
+        h1{
+          letter-spacing: 0;
+          font-size: 36px;
+        }
+        &::after{
+          content: '';
+          width: 468px;
+        }
+        &::before{
+          content: '';
+          width: 468px;
+        }
+
+      }
+      .news-title{
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        word-break: break-word;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        // text-align: left;
+      }
+  }
+  /deep/ .map-main{
+    .inner{
+      .title {
+        h1{
+          letter-spacing: 0;
+          font-size: 36px;
+        }
+        &::after{
+          content: '';
+          width: 480px;
+        }
+        &::before{
+          content: '';
+          width: 480px;
+        }
+
+      }
+    }
+  }
 }
 </style>

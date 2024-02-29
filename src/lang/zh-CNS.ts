@@ -48,7 +48,7 @@ export default {
     DeliveryTime: '送货时段',
     DeliveryInstructions: '送货指示',
     DeliveryMark: '预订请预早⼀天，每天晚上10 点截单，套餐满800 包市区送货。10点前⼊数⽅可隔天送货。',
-    All: '全部',
+    All: '所有产品',
     PlsAddPiUpAddr: '请添加相关自提地址信息！',
     NoneAddPiUpAddr: '查询不到相关自提地址信息！',
     AdditionalDiscount: '额外折扣已生效',
@@ -161,7 +161,14 @@ export default {
     Unit: '单位',
     Filter: '筛选',
     ViewAll: '查看更多',
-    SortBy: '排序'
+    SortBy: '排序',
+    Detailedinformation1: '点击产品查看详细讯息和放大产品图片',
+    Detailedinformation2: '符合您搜索要求的',
+    Quantityproduct1: '个产品',
+    Quantityproduct2: '查看12个以上产品',
+    Productname: '产品',
+    ProductCMS: '文章',
+    TotalNum: '共有'
   },
   Shoppingcart: {
     ShoppingcartTitle: '购物车',
@@ -479,7 +486,7 @@ export default {
     AboutUS: '关于我们',
     OurStores: '门市',
     BusinessHours: '营业时间',
-    BigSales: '热销产品',
+    BigSales: '产品中心',
     WhatNews: '今期流行',
     PlsChoose: '请点击选择您想要查看的内容：'
   },
@@ -515,7 +522,8 @@ export default {
     Activity: '活动',
     ViewMore: '查看更多 >',
     Corporateenvironment: '公司环境',
-    footercontact: '联系我们'
+    footercontact: '联系我们',
+    welcome: '欢迎光临天成实业（香港）有限公司，我们将竭诚为您服务！'
   },
   Action: {
     ReturnHomePage: '返回首页',
@@ -598,7 +606,7 @@ export default {
     Image: '产品图像',
     ProductInformation: '产品资料',
     Quantity: '数量',
-    ProductCode: '产品编号',
+    ProductCode: '编号',
     ProductName: '产品名称',
     OtherRequirement: '其他要求',
     DeliveryLeadTime: '送货排程',
@@ -672,7 +680,7 @@ export default {
     Balance: '数量余额',
     Norecord: '没有任何纪录 !',
     Pleaseselect: '请选择要删除的产品',
-    MinOrderQty: '最低订货量',
+    MinOrderQty: '最少订货量',
     Code: '编号',
     Type: '类型',
     AuthorizedSignature: '授权签名',

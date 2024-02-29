@@ -1,12 +1,12 @@
 <template>
   <div class="liveBox mobileVersion" style="text-align: center;">
     <div class="liveBox_in">
-        <div class="TitleBg"><div class="innerBox">{{$t('Cms.WhatNews')}}</div></div>
-        <div class="videoBg">
-            <p v-html="videoContent.Body"></p>
-        </div>
+        <!-- <div class="TitleBg"><div class="innerBox">{{$t('Cms.WhatNews')}}</div></div> -->
         <div class="mapBg">
            <p v-html="fbContent.Body"></p>
+        </div>
+        <div class="videoBg">
+            <p v-html="videoContent.Body"></p>
         </div>
     </div>
   </div>
@@ -18,12 +18,12 @@ export default class PkLiveBox extends Vue {
   videoContent:string='';
   fbContent:string='';
   getVideoContent () {
-    this.$Api.cms.getContentByDevice({ ContentId: 20294, IsMobile: true }).then(result => {
+    this.$Api.cms.getContentByDevice({ key: 'video', IsMobile: true }).then(result => {
       this.videoContent = result.CMS;
     });
   }
   getFbContent () {
-    this.$Api.cms.getContentByDevice({ ContentId: 20299, IsMobile: true }).then(result => {
+    this.$Api.cms.getContentByDevice({ key: 'fb', IsMobile: true }).then(result => {
       this.fbContent = result.CMS;
     });
   }
@@ -78,8 +78,8 @@ export default class PkLiveBox extends Vue {
 }
 .liveBox {
     width: 100%;
-    padding-bottom: 4.5rem;
-    background: url('/images/mobile/Mobile-index_04.jpg') no-repeat center center;
+    padding-bottom: 4rem;
+    // background: url('/images/mobile/Mobile-index_04.jpg') no-repeat center center;
     background-size: 100% 100%;
     .liveBox_in{
     width: 90%;
@@ -94,10 +94,10 @@ export default class PkLiveBox extends Vue {
       // }
       .videoBg{
         margin-top: 2rem;
-        margin-bottom: 3rem;
-        background-size: 100% 100%;
-        display: inline-block;
-        padding: 2.5rem;
+        // margin-bottom: 3rem;
+        // background-size: 100% 100%;
+        display: block;
+        // padding: 2.5rem;
         box-sizing: border-box;
         img{
           width: 100%;

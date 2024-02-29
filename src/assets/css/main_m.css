@@ -121,6 +121,10 @@ body {
     overflow-x: hidden!important;
 }
 
+body.locale {
+    font-family: 'Arial' !important;
+}
+
 div {
     user-select: none;
     -webkit-user-select: none;
@@ -483,6 +487,10 @@ button {
 
 .messagelayer {
     z-index: 10000!important;
+}
+
+.el-select-dropdown {
+    z-index: 21400 !important;
 }
 
 .TotalSunm {

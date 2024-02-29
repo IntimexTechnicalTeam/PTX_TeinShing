@@ -1,5 +1,5 @@
 <template>
-<div id="footer">
+<div id="footer" :class="{'ENG':$Storage.get('locale') === 'E'}">
   <div class="footbg">
     <div class="footerMain">
         <!-- <div class="footerTop">
@@ -8,8 +8,8 @@
         </div> -->
         <div class="footerBotttom">
           <div class="footerLeft">
-            <p><img src="/images/pc/index_107.png" /></p>
-
+            <p v-if="$Storage.get('locale') === 'E'"><img src="/images/pc/index_107eng.png" /></p>
+            <p v-else><img src="/images/pc/index_107.png" /></p>
           </div>
           <div class="footerMiddle">
             <ul v-for="(n,index) in footerMenus" :key="index">
@@ -266,5 +266,37 @@ export default class InsFooterLayout1 extends Vue {
   vertical-align:middle;
   margin: 5px;
   height: 32px;
+}
+#footer.ENG{
+  .footerMiddle{
+    width: 778px;
+    >ul{
+      >li{
+        a{
+          font-size: 16px;
+          padding: 0 20px;
+        }
+        >ul{
+          >li{
+            a{
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .footerRight{
+    width: 300px;
+    margin-left: 10px;
+    .title{
+      font-size: 16px;
+    }
+    .body{
+      /deep/ p{
+        font-size: 14px;
+      }
+    }
+  }
 }
 </style>

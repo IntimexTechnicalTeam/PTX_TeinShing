@@ -12,7 +12,7 @@
       <div class="left">
         <div class="aboutBodyIn" v-html="aboutContent.Body"></div>
         <div class="more">
-          <a href="/CMS/content/20295">{{ $t("home.ViewMore") }}</a>
+          <a href="/cms/catDetail/40122">{{ $t("home.ViewMore") }}</a>
         </div>
       </div>
       <div class="right">
@@ -145,6 +145,7 @@ export default class HomeAbout extends Vue {
       color: #2f4858;
       position: relative;
       text-align:center;
+      letter-spacing: 2px;
     }
   }
 }

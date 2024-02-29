@@ -4,13 +4,17 @@
       <div class="innerBox">{{$t('Cms.BigSales')}}</div>
     </div>
     <div class="swiper-container swiper-container-hot">
-        <swiper :options="swiperOption" ref="mySwiper">
-        <!-- slides -->
+      <ul>
+        <li v-for="(slide, index) in hotProducts" :key="index">
+          <inProductWindow :item="slide"  style="width:100%;" class="insProductHot"></inProductWindow>
+        </li>
+      </ul>
+        <!-- <swiper :options="swiperOption" ref="mySwiper">
         <swiperSlide v-for="(slide, index) in hotProducts" :key="index">
            <inProductWindow :item="slide"  style="width:100%;" class="insProductHot"></inProductWindow>
         </swiperSlide>
         <div class="swiper-scrollbar"   slot="scrollbar"></div>
-        </swiper>
+        </swiper> -->
 
     </div>
   </div>
@@ -109,6 +113,7 @@ export default class PkHotProduct extends Vue {
         color: #2f4858;
         position: relative;
         text-align: center;
+        letter-spacing: 2px;
       }
 
 }
@@ -166,5 +171,18 @@ export default class PkHotProduct extends Vue {
     display: block;
     border: 1px solid #000;
     border-radius: 10px;
+}
+.swiper-container-hot{
+  ul{
+    li{
+      float: left;
+      width: 380px;
+      margin-right: 30px;
+      margin-bottom: 30px;
+      &:nth-child(3n){
+        margin-right: 0;
+      }
+    }
+  }
 }
 </style>

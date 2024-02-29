@@ -462,6 +462,8 @@ export default class InsLogin extends Vue {
   text-align: center;
   padding: 12px 3px;
   color: #fff;
+  margin-bottom: 10px;
+  border-radius: 3px;
 }
 .input-btn {
   appearance: none;
@@ -473,14 +475,14 @@ export default class InsLogin extends Vue {
 
 .top-member-detail {
   width: 300px;
-  left: -234px;
-  top: 50px;
+  left: -236px;
+  top: 40px;
 }
 
 .top-member-detail .window-top {
   right: 40px;
   position: absolute;
-  right: 35px;
+  right: 40px;
   top: -18px;
   width: 24px;
   height: 18px;
@@ -550,16 +552,29 @@ export default class InsLogin extends Vue {
 
 .login-after-select p a {
   display: block;
-  color: #666;
-  font-size: 17px;
+  color: #808080;
+  font-size: 16px;
   padding: 12px 0;
-  border-bottom: 1px solid #ccc;
-  text-indent: 10px;
+  // border-bottom: 1px solid #ccc;
+  // text-indent: 10px;
   text-align: center;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
 }
 
 .login-after-select .logout {
-  margin-top: 25px;
+  margin-top: 10px;
+
+  a{
+    background-color: #de2910 !important;
+  border-radius: 3px;
+  }
 }
 
 .login-after-select .logout a {
@@ -573,7 +588,16 @@ export default class InsLogin extends Vue {
 }
 
 .login-after-select p a:hover {
-  color: #000;
+  color: #de2910;
+  &::before{
+    content: '';
+    width: 6px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #de2910;
+  }
 }
 
 .login-after-select .logout a:hover {

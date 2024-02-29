@@ -135,15 +135,14 @@ export default class accountHeader extends Vue {
       }
 
       .iconBg {
-        border: 1px solid #fff;
+        // border: 1px solid #fff;
         background-size: contain;
         float: left;
-        width: 15.9%;
+            width: 18%;
         height: 50px;
         text-align: center;
-        padding: 10px;
-        margin-bottom: 20px;
-        margin-right: 2.66%;
+        margin-bottom: 25px;
+        margin-right: 2%;
         &:nth-child(5n) {
           margin-right: 0px!important;
         }
@@ -155,6 +154,7 @@ export default class accountHeader extends Vue {
           display: flex;
           align-items: center;
           justify-content: center;
+          border-radius: 25px;
         }
         &:hover {
           transform: translateY(-3px);
@@ -185,20 +185,22 @@ export default class accountHeader extends Vue {
       }
 
       .router-link-active {
-        border: 1px solid @base_color;
+        // border: 1px solid @base_color;
         background-size: contain;
         float: left;
         height: 50px !important;
         text-align: center;
-        padding: 10px;
+        // padding: 10px;
+        border-radius: 25px;
         .innerStyle {
-          background: @base_color;
+          background: #de2910;
           display: block;
           width: 100%;
           height: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
+          border-radius: 25px;
         }
         span {
           font-weight: 600 !important;

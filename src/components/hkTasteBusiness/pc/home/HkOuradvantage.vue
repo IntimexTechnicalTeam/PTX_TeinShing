@@ -34,7 +34,7 @@ export default class PkLiveBox extends Vue {
     return this.$store.state.isMobile;
   }
   getadvantage () {
-    this.$Api.cms.getFromContentByCatId(40117, this.pager.currentPage, this.pager.pageSize, this.isMobile, this.SortName, this.SortOrder).then(result => {
+    this.$Api.cms.getFromContentByCatId(40134, this.pager.currentPage, this.pager.pageSize, this.isMobile, this.SortName, this.SortOrder).then(result => {
         this.contentList = result.Data;
         this.conetntTitle = result.Data[1].Category.Name;
         console.log(result, 'result.Data');
@@ -89,6 +89,7 @@ export default class PkLiveBox extends Vue {
         font-weight: bold;
         color: #2f4858;
         position: relative;
+        letter-spacing: 2px;
 
       }
     }

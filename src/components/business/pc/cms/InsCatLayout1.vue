@@ -85,16 +85,32 @@ export default class InsCatLayout1 extends Vue {
     CateName:string='';
     TabData:any[]=[];
     private waiting: boolean = true;
+
+  private SortOrder: string = 'asc';
+  private SortName: string = 'CreateDate'
     NoImg:string='/images/pc/proddef.jpg';
       get cid () {
       return this.$route.params.id;
     }
+    get isMobile () {
+    return this.$store.state.isMobile;
+  }
     GoLink(v) {
         // window.location.href = '/cms/contentN/' + v.Id;
 
     }
     getContentsByCatId () {
-        this.$Api.cms.getContentsByCatId(this.cid, this.currentPage, this.pageSize).then((result) => {
+        // this.$Api.cms.getContentsByCatId(this.cid, this.currentPage, this.pageSize).then((result) => {
+        //     if (result) {
+        //         this.ListData = result.Data;
+        //     }
+        //     result.Data.forEach(function (i) {
+        //     var newDate = new Date(i.ContentDateTime.replace(/-/g, '/'));
+        //     i.ContentDateTime = newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate();
+        //     });
+        //     this.totalRecord = result.TotalRecord;
+        // });
+        this.$Api.cms.getFromContentByCatId(this.cid, this.currentPage, this.pageSize, this.isMobile, this.SortName, this.SortOrder).then(result => {
             if (result) {
                 this.ListData = result.Data;
             }
@@ -103,7 +119,7 @@ export default class InsCatLayout1 extends Vue {
             i.ContentDateTime = newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate();
             });
             this.totalRecord = result.TotalRecord;
-        });
+      });
     }
    // 根据设备类型获取CMSCategory信息
   getCategoryByDevice () {

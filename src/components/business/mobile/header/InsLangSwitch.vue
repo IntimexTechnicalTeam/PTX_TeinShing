@@ -61,16 +61,16 @@ export default class InsLangSwitch extends Vue {
     }
     select{
       width: 100%;
-      background: transparent url('/images/mobile/arrow-down-back.png')  80% 50% no-repeat;
+      background: transparent url('/images/mobile/arrow-down-back.png')  90% 50% no-repeat;
       background-size: 1rem;
       border:none;
       box-sizing: border-box;
-      color:#666666;
+      color:#2f4858;
       appearance: none;
       -moz-appearance: none;
       -webkit-appearance: none;
-      padding-left: .8rem;
-      font-size: 1.4rem;
+      // padding-left: .8rem;
+      font-size: 1.2rem;
       outline: none;
       option{
         color:#666666;

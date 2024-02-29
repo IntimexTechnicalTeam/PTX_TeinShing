@@ -1,5 +1,5 @@
 <template>
-  <div class="productDetail_container NomralBg" >
+  <div class="productDetail_container NomralBg" :class="{'ENG':$Storage.get('locale') === 'E'}">
      <div v-if="this.Permission == 3" class="IsDetailshow">
         {{$t('messageTips.NoProduct')}}
     </div>
@@ -15,7 +15,11 @@
     </div>
     <div class="tab_warpper" v-if="PanelDetail.negotiable">
       <div class="tab_header">
-        <div class="detail_title">{{$t('product.ProductIntroduction')}}</div>
+        <div class="detail_title">
+          <h1>
+            {{$t('product.ProductIntroduction')}}
+          </h1>
+        </div>
       </div>
       <div class="clear"></div>
       <div class="product_detail" v-html="Tabs.Detail" v-show="IsDetail && Tabs.Detail!=''"></div>
@@ -258,7 +262,7 @@ export default class ProductDetail extends Vue {
   background-size: 100% 100%;
   display: inline-block;
   box-sizing: border-box;
-  padding-top: 4rem;
+  padding-top: 2rem;
   .IsDetailshow {
     width: 90%;
     margin: 0 auto;
@@ -302,17 +306,52 @@ export default class ProductDetail extends Vue {
             background-size: 100% 100%!important;
         }
       }
+      // .detail_title{
+      //     width: 100%;
+      //     margin: 0 auto;
+      //     background: #b19162;
+      //     background-size: 100% 100%;
+      //     text-align: center;
+      //     font-size: 1.4rem;
+      //     color: #fff;
+      //     height: 40px;
+      //     line-height: 40px;
+      // }
       .detail_title{
-          width: 100%;
-          margin: 0 auto;
-          background: #b19162;
-          background-size: 100% 100%;
-          text-align: center;
-          font-size: 1.4rem;
-          color: #fff;
-          height: 40px;
-          line-height: 40px;
+      height: 7rem;
+      background: url(/images/pc/index_21.png) no-repeat center center;
+      position: relative;
+      background-size: contain;
+      &::before{
+          content: '';
+          width: 32%;
+          height: 1px;
+          background-color: #e3e6e8;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        &::after{
+          content: '';
+          width: 32%;
+          height: 1px;
+          background-color: #e3e6e8;
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      h1{
+        line-height: 7rem;
+        font-size: 2rem;
+        font-weight: bold;
+        color: #2f4858;
+        position: relative;
+        letter-spacing: 2px;
+        text-align: center;
       }
+    }
       .comment_title{
         border:1px solid #000;
       }
@@ -326,18 +365,18 @@ export default class ProductDetail extends Vue {
       h3 {
         font-size: 1.4rem;
         line-height: 2rem;
-        color: #333333;
+        color: #666666;
         font-weight: 500;
       }
       /deep/ p{
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         line-height: 2rem;
-        color: #333333;
+        color: #666666;
      }
      /deep/ span{
-        font-size: 1.4rem!important;
+        font-size: 1.2rem!important;
         line-height: 2rem;
-        color: #333333;
+        color: #666666;
      }
     }
   }
@@ -392,7 +431,7 @@ export default class ProductDetail extends Vue {
       background-size: contain;
       width: 15px;
       height: 15px;
-      margin-left: .5rem;
+      // margin-left: .5rem;
       margin-right: .5rem;
     }
     &:hover {
@@ -408,7 +447,7 @@ export default class ProductDetail extends Vue {
       width: 15px;
       height: 15px;
       margin-left: .5rem;
-      margin-right: .5rem;
+      // margin-right: .5rem;
     }
     &:hover {
       .img {
@@ -418,8 +457,8 @@ export default class ProductDetail extends Vue {
   }
   .prev ,.next{
     padding: 5px 10px;
-    border: 1px solid #cab597;
-    color: #cab597;
+    border: 1px solid #2f4858;
+    color: #2f4858;
     display: flex;
     align-items: center;
     font-size: 1.2rem;
@@ -427,8 +466,48 @@ export default class ProductDetail extends Vue {
     transition: all .3s;
     cursor: pointer;
     &:hover {
-      background: #cab597;
+      background: #2f4858;
       color: #fff;
+    }
+  }
+}
+.NomralBg.ENG{
+  /deep/ .productPtx .productInfo .TitleBg span{
+    width: 13rem;
+  }
+  /deep/ .tab_warpper .tab_header{
+    .detail_title{
+      h1{
+        letter-spacing: 0;
+          font-size: 1.8rem;
+      }
+
+          &::before{
+          content: '';
+          width: 14%;
+        }
+        &::after{
+          content: '';
+          width: 14%;
+        }
+
+    }
+  }
+  /deep/ .productCat{
+    .NoramlTitle{
+      h1{
+        letter-spacing: 0;
+          font-size: 1.8rem;
+      }
+
+          &::before{
+          content: '';
+          width: 20%;
+        }
+        &::after{
+          content: '';
+          width: 20%;
+        }
     }
   }
 }

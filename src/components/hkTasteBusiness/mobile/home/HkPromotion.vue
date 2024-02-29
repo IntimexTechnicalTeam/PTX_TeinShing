@@ -1,12 +1,10 @@
 <template>
   <div class="PromotionMain">
-          <!-- AD1 -->
-          <div class="InnerSide">
+          <!-- <div class="InnerSide">
             <div class="main">
                 <div class="RecommendText">{{Title1}}</div>
                 <div class="swiperBg">
                 <swiper :options="swiperOptionT1">
-                  <!-- slides -->
                   <swiperSlide v-for="(slide, index1) in banner1" :key="index1">
                     <router-link :to="slide.Url"><img :src="slide.Image" /></router-link>
                   </swiperSlide>
@@ -14,12 +12,10 @@
                 </div>
                 <p class="content">{{content1}}</p>
             </div>
-           <!-- AD2 -->
            <div class="main">
                 <div class="RecommendText">{{Title2}}</div>
                 <div class="swiperBg">
                 <swiper :options="swiperOptionT2">
-                  <!-- slides -->
                   <swiperSlide v-for="(slide, index2) in banner2" :key="index2">
                     <router-link :to="slide.Url"><img :src="slide.Image" /></router-link>
                   </swiperSlide>
@@ -28,12 +24,10 @@
                 <p class="content">{{content2}}</p>
             </div>
 
-           <!-- AD3 -->
             <div class="main">
                   <div class="RecommendText">{{Title3}}</div>
                   <div class="swiperBg">
                   <swiper :options="swiperOptionT3" >
-                    <!-- slides -->
                     <swiperSlide v-for="(slide, index3) in banner3" :key="index3">
                       <router-link :to="slide.Url"><img :src="slide.Image" /></router-link>
                     </swiperSlide>
@@ -41,7 +35,7 @@
                   </div>
                 <p class="content">{{content3}}</p>
             </div>
-          </div>
+          </div> -->
     <!-- 限时大平卖 -->
     <div class="SalesMain">
           <HkHotProduct />
@@ -128,7 +122,7 @@ export default class HkPromotion extends Vue {
     return this.$Storage.get('locale');
   }
   created () {
-    this.getHeaderBannerLst();
+    // this.getHeaderBannerLst();
   }
 }
 </script>
@@ -146,17 +140,19 @@ export default class HkPromotion extends Vue {
   margin-bottom: 1rem;
 }
 .PromotionMain{
-    background: url(/images/mobile/MobileIndex_02.jpg) no-repeat center center;
+    // background: url(/images/mobile/MobileIndex_02.jpg) no-repeat center center;
     background-size: 100% 100%;
     display: inline-block;
     width: 100%;
     padding-top: 3rem;
     padding-bottom: 2rem;
-    margin-top: -.5rem;
+    // margin-top: -.5rem;
     position: relative;
   .SalesMain{
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
     .hotTitle{
         width: 100%;
         background: url('/images/mobile/mobileIndex_04.png') center 0 no-repeat;

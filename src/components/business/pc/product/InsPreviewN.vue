@@ -1,29 +1,27 @@
 <template>
   <div class="in_preview_warpper  PcVersionPreview" :style="warpperStyle" @mousemove.stop>
         <div class="in_preview_img_warpper" >
-            <img :src="isClick?AttrImg:CurrentPic" @click="viewImg(currentIndex)">
+            <img :src="CurrentPic" @click="viewImg(currentIndex)">
           </div>
         <div class="swiper-father">
-          <swiper :options="SwiperOption" ref="mySwiper" style="z-index:1000;">
-            <swiperSlide v-for="(page,idx) in ShowItems" :key="idx">
+          <swiper :options="SwiperOptionPreview" ref="mySwiper" style="z-index:1000;">
+            <swiperSlide v-for="(item,index) in ShowItems" :key="index">
               <div class="in_slider_page_container">
-                <div class="in_slider_page_item" v-for="(item,index) in page" :key="index">
-                  <div class="in_slider_page_item" v-if="!item.Virtual" :class="{ 'item':!item.Virtual }">
-                    <img :src="item.Src[0]" :data-key="item.Src[0]" @error="loadError" @click="getImg(item.Src[0],index)"/>
-                  </div>
+                <div class="in_slider_page_item" v-if="!item.Virtual" :class="{ 'item':!item.Virtual }">
+                  <img :src="item.Src[1]" :data-key="item.Src[1]" @error="loadError" @click="getImg(item.Src[0],index)"/>
                 </div>
               </div>
             </swiperSlide>
           </swiper>
-            <div class="swiper-button-prev" slot="button-prev"></div>
-            <div class="swiper-button-next" slot="button-next"></div>
+            <!-- <div class="swiper-button-prev" slot="button-prev"></div> -->
+            <!-- <div class="swiper-button-next" slot="button-next"></div> -->
           </div>
           <div v-if="!isClick">
-            <Viewer :images="ShowItems[0]"
+            <Viewer :images="ShowItems"
                       class="viewer" ref="viewer"
                       @inited="inited"
               >
-              <img v-for="(item,index) in ShowItems[0]" :src="item.Src[0]" :key="index" :alt="ProductTitleName" class="PreViewimage">
+              <img v-for="(item,index) in ShowItems" :src="item.Src" :key="index" :alt="ProductTitleName" class="PreViewimage">
               </Viewer>
           </div>
             <div v-else>
@@ -61,8 +59,8 @@ export default class InsPreview extends Vue {
   // data
   private mirrorShow: boolean = false;
   private currentIndex = 0;
-  private InnerItems: ImgItem[] = [];
-  private ShowItems: ImgItem[][] = [];
+  // private InnerItems: ImgItem[] = [];
+  private ShowItems: ImgItem[] = [];
   @Prop() private readonly ProductTitleName!: string[];
   private MiddlePic = {
     top: 0,
@@ -70,17 +68,22 @@ export default class InsPreview extends Vue {
     right: 0,
     bottom: 0
   };
-SwiperOption: object = {
+SwiperOptionPreview: object = {
+    slidesPerView: 5,
+    spaceBetween: 10,
     // pagination: {
     //   el: '.swiper-pagination',
     //   clickable: true
     // },
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev'
-    }
-    // slidesPerColumn: 1,
-    // slidesPerView: 4,
+      nextEl: '.swiper-button-next-Preview',
+      prevEl: '.swiper-button-prev-Preview'
+    },
+    freeMode: true,
+    watchSlidesVisibility: true,
+    watchSlidesProgress: true,
+    observer: true,
+    observeParents: true
   };
   private TranslateM: string = '';
   private MirrorImgM: string = '';
@@ -120,22 +123,22 @@ SwiperOption: object = {
     }
     this.$store.dispatch('setNormalImg', this.imgList[0][0]);
     this.CurrentPic = this.imgList[0][0];
-    this.InnerItems = [];
+    // this.InnerItems = [];
     this.ShowItems = [];
     this.imgList.forEach(element => {
-      this.InnerItems.push(new ImgItem(element));
+      this.ShowItems.push(new ImgItem(element));
     });
-    while (this.InnerItems.length > 0) {
-      this.ShowItems.push(this.InnerItems.splice(0, this.pageNum));
-    }
-    while (
-      this.ShowItems.length > 0 &&
-      this.ShowItems[this.ShowItems.length - 1].length < this.pageNum
-    ) {
-      this.ShowItems[this.ShowItems.length - 1].push(
-        new ImgItem('', true)
-      );
-    }
+    // while (this.InnerItems.length > 0) {
+    //   this.ShowItems.push(this.InnerItems.splice(0, this.pageNum));
+    // }
+    // while (
+    //   this.ShowItems.length > 0 &&
+    //   this.ShowItems[this.ShowItems.length - 1].length < this.pageNum
+    // ) {
+    //   this.ShowItems[this.ShowItems.length - 1].push(
+    //     new ImgItem('', true)
+    //   );
+    // }
   }
  inited(Viewer) {
     this.$viewer = Viewer;
@@ -226,7 +229,7 @@ SwiperOption: object = {
     position: relative;
   }
   .swiper-container{
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     flex-wrap: wrap;
   }
@@ -237,8 +240,8 @@ SwiperOption: object = {
     display: none;
 }
 .in_preview_warpper {
-  width: 100%;
-  min-height: 460px;
+  width: 520px;
+  min-height: 520px;
   display: inline-block;
   vertical-align: top;
 }
@@ -247,6 +250,10 @@ SwiperOption: object = {
     // border: 1px solid;
     margin: 20px 0;
     line-height: 0;
+    margin-top: 0;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    box-sizing: border-box;
 }
 .in_preview_img_warpper > img {
   width: 100%;
@@ -289,15 +296,20 @@ SwiperOption: object = {
   flex-wrap: nowrap;
   width: 100%;
   margin: 0 auto;
-  padding: 10px;
+  // padding: 10px;
   user-select: none;
+  border: 1px solid #f0f0f0;
+  border-radius: 3px;
+  &:hover{
+    border: 1px solid #de2910;
+  }
 }
 .in_slider_page_item{
   width: 100%;
   box-sizing: border-box;
   font-size: 0;
-  border-radius: 2px;
-  padding: 5px;
+  // border-radius: 2px;
+  // padding: 5px;
   .item{
     border: solid 1px#f0f0f0;
     padding: 0;

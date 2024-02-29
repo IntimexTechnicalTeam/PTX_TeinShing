@@ -2,9 +2,9 @@
   <div class="indexHotVideo">
     <!-- <div class="TitleBg"><div class="innerBox">{{$t('Cms.WhatNews')}}</div></div> -->
     <div class="HotVideoMain">
-      <div class="leftVideo">
+      <!-- <div class="leftVideo">
         <p v-html="fbContent.Body"></p>
-      </div>
+      </div> -->
       <div class="rightVideo">
         <p v-html="videoContent.Body"></p>
       </div>
@@ -18,12 +18,12 @@ export default class PkLiveBox extends Vue {
   videoContent:string='';
   fbContent:string='';
   getVideoContent () {
-    this.$Api.cms.getContentByDevice({ ContentId: 20294, IsMobile: false }).then(result => {
+    this.$Api.cms.getContentByDevice({ key: 'video', IsMobile: false }).then(result => {
       this.videoContent = result.CMS;
     });
   }
   getFbContent () {
-    this.$Api.cms.getContentByDevice({ ContentId: 20299, IsMobile: false }).then(result => {
+    this.$Api.cms.getContentByDevice({ key: 'fb', IsMobile: false }).then(result => {
       this.fbContent = result.CMS;
     });
   }
@@ -98,7 +98,8 @@ export default class PkLiveBox extends Vue {
 }
 .HotVideoMain .rightVideo{
     width: 770px;
-    float: right;
+    margin: 0 auto;
+    // float: right;//
     background-size: 100% 100%;
     box-sizing: border-box;
 }

@@ -2,11 +2,11 @@
     <li class="NsReSearchItem">
         <p class="category">
           {{searchGroup.Name}}
-            <i class="el-icon-arrow-up colorstyle"  @click="isOpen = !isOpen" v-if="!isOpen"></i>
-            <i class="el-icon-arrow-down" @click="isOpen = !isOpen" v-else></i>
+            <i class="el-icon-arrow-down colorstyle"  @click="isOpen = !isOpen" v-if="!isOpen"></i>
+            <i class="el-icon-arrow-up" @click="isOpen = !isOpen" v-else></i>
         </p>
         <transition name="fade">
-        <ul :class="{'open': isOpen}" >
+        <ul class="open" :class="{'show': isOpen}">
             <li class="viewall" :class="{'borderLine':isAll}">
                 <input type="checkbox" :id="searchGroup.Name+'-All'" v-model="isAll" @click="checkAll($event,searchGroup)" style="display:none;">
                 <label :for="searchGroup.Name+'-All'" >{{$t('Message.All')}}</label>
@@ -112,27 +112,38 @@ export default class NsNsReSearchItem extends Vue {
         color: @base_color;
       }
       .borderLine {
-        border: 1px solid @base_color;
-       }
+        // border: 1px solid @base_color;
+        color: #de2910;
+        &::before{
+          content: '';
+          width: 6px;
+          height: 100%;
+          background-color: #de2910;
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+      }
       .viewall {
         border-radius: .5rem;
-        background: #fff;
-        margin-top: 1rem;
+        background: #f5f5f5;
+        margin-top: 2rem;
+        overflow: hidden;
         label {
-          color: @base_color!important;
+          // color: @base_color!important;
+          color: #808080;
+          text-align: center;
         }
       }
       p.category {
-        width: 100%;
-        font-size: 22px;
-        color: #333333;
-        background-color: #FFF;
+        // width: 100%;
+        font-size: 1.4rem;
+        color: #fff;
+        // margin-right: 1rem;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
         justify-self: start;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
         align-items: center;
         -ms-flex-negative: 0;
         flex-shrink: 0;
@@ -140,27 +151,41 @@ export default class NsNsReSearchItem extends Vue {
         height: 3.5rem;
         line-height: 3.5rem;
         border-radius: 2rem;
-        padding-top: 1rem;
+        // padding-top: 1rem;
+        background-color: #de2910;
+        justify-content: center;
+        margin-left: 5%;
+            margin-right: 5%;
+            box-sizing: border-box;
         i{
-          position: absolute;
-          right: 0px;
-          top: 20px;
+          // position: absolute;
+          // right: 0px;
+          // top: 20px;
           font-size: 1.6rem;
+          color: #fff;
+          margin-left: 1rem;
         }
     }
 
      >ul {
        transition: all 3s;
-       margin-bottom: 10rem;
+       padding-bottom: 1rem;
+        box-shadow: 0 2px 5px #d1d1d1;
+      //  margin-bottom: 10rem;
         >li {
             height: 3.5rem;
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            background: #f2f1f0;
-            border-radius: .5rem;
+            background: #f5f5f5;
+            border-radius: .3rem;
             margin-bottom: 1rem;
-            border:1px solid #f2f1f0;
+            // border:1px solid #f2f1f0;
+            position: relative;
+            overflow: hidden;
+            margin-left: 5%;
+            margin-right: 5%;
+            box-sizing: border-box;
             input[type="checkbox"] {
                 width: 18px;
                 height: 18px;
@@ -178,15 +203,26 @@ export default class NsNsReSearchItem extends Vue {
                 background-size: auto;
 
                 &+label {
-                    color: @base_color;
+                    color: #de2910;
+                    text-align: center;
+                    &::before{
+                      content: '';
+                      width: 6px;
+                      height: 100%;
+                      background-color: #de2910;
+                      position: absolute;
+                      left: 0;
+                      top: 0;
+                    }
                 }
             }
 
             label {
-            font-size: 20px;
-            color: #666666;
+            font-size: 1.4rem;
+            color: #808080;
             width: 90%;
             margin: 0 auto;
+            text-align: center;
             }
         }
 
@@ -200,6 +236,10 @@ export default class NsNsReSearchItem extends Vue {
         &.open {
                 display: none;
                 transition: all 3s;
+        }
+        &.show{
+          display: block;
+          transition: all 3s;
         }
     }
 }

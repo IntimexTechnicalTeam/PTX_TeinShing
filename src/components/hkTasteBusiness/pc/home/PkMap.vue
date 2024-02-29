@@ -77,6 +77,7 @@ export default class PkMap extends Vue {
         color: #2f4858;
         position: relative;
         text-align: center;
+        letter-spacing: 2px;
       }
     }
     .maps{

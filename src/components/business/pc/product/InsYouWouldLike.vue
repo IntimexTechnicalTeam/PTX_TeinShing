@@ -95,8 +95,8 @@ export default class InsYouWouldLike extends Vue {
       height: 40px;
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
-      border:1px solid #c4a982;
-      background:#c4a982 url('/images/mobile/other_31.png') no-repeat center center!important;
+      // border:1px solid #c4a982;
+      background: url('/images/mobile/other_31.png') no-repeat center center!important;
       background-size: 15px;
       outline: 0;
       left:.9rem;
@@ -106,8 +106,8 @@ export default class InsYouWouldLike extends Vue {
       height: 40px;
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
-      border:1px solid #c4a982;
-      background: #c4a982 url('/images/mobile/other_32.png') no-repeat center center!important;
+      // border:1px solid #c4a982;
+      background:  url('/images/mobile/other_32.png') no-repeat center center!important;
       background-size: 15px;
       outline: 0;
       right: .9rem;
@@ -115,23 +115,39 @@ export default class InsYouWouldLike extends Vue {
 </style>
 <style  lang="less"  scoped>
   .NoramlTitle {
-    background: url('/images/mobile/ptx_14.png') no-repeat center center;
-    background-size: contain;
-    display: flex;
-    flex-wrap: wrap;
-    position: relative;
-    width: 60%;
-    height: 3rem;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    .text {
-      font-size: 26px;
-      color: #fff;
-      padding-left: 3rem;
-      font-weight: 700;
-    }
+    height: 100px;
+      background: url(/images/pc/index_21.png) no-repeat center center;
+      position: relative;
+      text-align: center;
+      margin-bottom: 30px;
+      &::before{
+          content: '';
+          width: 502px;
+          height: 1px;
+          background-color: #e3e6e8;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        &::after{
+          content: '';
+          width: 502px;
+          height: 1px;
+          background-color: #e3e6e8;
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      .text{
+        line-height: 100px;
+        font-size: 32px;
+        font-weight: bold;
+        color: #2f4858;
+        position: relative;
+        letter-spacing: 2px;
+      }
   }
 .PcVersionYouLike {
   margin-top: 80px;
@@ -153,6 +169,20 @@ export default class InsYouWouldLike extends Vue {
 }
 .in_slider_page_item {
    width: 100%;
+
+   /deep/ .in_pdWindow_page_item{
+      border: 1px solid #f0f0f0;
+      border-radius: 3px;
+      &:hover{
+        border: 1px solid #de2910;
+        .in_pdWindow_item_description{
+          background-color: #de2910;
+          .in_pdWindow_item_title{
+            color: #fff;
+          }
+        }
+      }
+   }
 }
     .titleCn {
       width: 100%;

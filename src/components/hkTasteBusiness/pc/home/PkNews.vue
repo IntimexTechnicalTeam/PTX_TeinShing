@@ -9,12 +9,12 @@
           <img :src="n.Cover" class="NewsPart" />
         </router-link>
         <p class="news-title">{{n.Title}}</p>
-        <p class="news-date">{{n.CreateDate}}</p>
+        <p class="news-date">{{n.Desc}}</p>
         <p class="news-text" v-html="n.Body"></p>
       </li>
     </ul>
     <div class="more">
-      <a href="/cms/catDetail/40113">{{$t('home.ViewMore')}}></a>
+      <a href="/cms/catDetail/40132">{{$t('home.ViewMore')}}></a>
     </div>
   </div>
 </template>
@@ -37,7 +37,7 @@ export default class PkNews extends Vue {
     var cond = {
       Page: 1,
       PageSize: 3,
-      catId: 40121
+      catId: 40132
     };
     // this.$Api.cms.getFromContentByCatId(40121, this.pager.currentPage, this.pager.pageSize, this.isMobile, this.SortName, this.SortOrder).then(result => {
     //   result.Data.forEach(function (item) {
@@ -103,6 +103,7 @@ export default class PkNews extends Vue {
         color: #2f4858;
         position: relative;
         text-align: center;
+        letter-spacing: 2px;
       }
     }
 }
@@ -128,7 +129,8 @@ export default class PkNews extends Vue {
             color: #2f4858;
             line-height: 22px;
             margin-bottom: 10px;
-            height: 40px;
+            // height: 40px;
+            font-weight: bold;
         }
 
         .img{
@@ -150,6 +152,22 @@ export default class PkNews extends Vue {
           line-height: 25px;
           text-align: left;
           margin-bottom: 10px;
+          height: 120px;
+          overflow: hidden;
+          /deep/ p{
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            word-break: break-word;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #999999;
+            line-height: 25px;
+            text-align: left;
+          }
         }
         .news-date{
           font-size: 16px;

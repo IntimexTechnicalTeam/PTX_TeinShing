@@ -122,6 +122,8 @@ export default class InsCatLayout1 extends Vue {
             padding-bottom: 10px;
             }
             .desc{
+              height: 125px;
+              overflow: hidden;
                 /deep/ p{
                     font-size: 16px;
           color: #999999;
@@ -132,8 +134,8 @@ export default class InsCatLayout1 extends Vue {
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
+            -webkit-line-clamp: 4;
+            line-clamp: 4;
             -webkit-box-orient: vertical;
                 }
             }

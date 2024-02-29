@@ -1,7 +1,12 @@
 <template>
-  <a href="/" class="logo">
-    <img src="/images/pc/pcindex_09.png" />
+<div class="logo">
+  <a href="/" v-if="$Storage.get('locale') === 'E'">
+    <img src="/images/mobile/Mlogoeng.png" />
   </a>
+  <a href="/" v-else>
+    <img src="/images/mobile/Mlogo.png" />
+  </a>
+</div>
 </template>
 
 <script lang="ts">
@@ -14,7 +19,8 @@ export default class InsLogo extends Vue {
 <style scoped lang="less">
 .logo {
   img {
-    width: 15rem;
+    width: 100%;
+    display: block;
   }
 }
 </style>

@@ -70,11 +70,11 @@ export default {
     LoginNow: 'Login Now',
     NoMore: 'No More',
     Next: 'Next',
-    Prev: 'Prev',
-    Catalog: 'Catalog',
-    AskFor: 'To ask for a quotation, press',
+    Prev: 'Previous',
+    Catalog: 'Directory',
+    AskFor: 'To inquire about a quotation, please click',
     ProductInformation: 'Product Information',
-    OtherDetails: 'Other Details',
+    OtherDetails: 'Other Information',
     Fav: 'Fav',
     Payments: 'Payment Method',
     ProductList: 'Product List',
@@ -114,7 +114,7 @@ export default {
     LatestNews: 'Latest News'
   },
   product: {
-    ProductCode: 'Product Code',
+    ProductCode: 'Product number',
     buy: 'Buy Now',
     addToCart: 'Add To Cart',
     buyNow: 'Buy now',
@@ -161,7 +161,14 @@ export default {
     Unit: 'Unit',
     Filter: 'Filter',
     ViewAll: 'View All',
-    SortBy: 'SortBy'
+    SortBy: 'SortBy',
+    Detailedinformation1: 'Click on the product to view detailed information and enlarge the product image',
+    Detailedinformation2: 'products that meet your search requirements',
+    Quantityproduct1: 'products',
+    Quantityproduct2: 'to view 12 or more products',
+    Productname: 'Products',
+    ProductCMS: 'CMS',
+    TotalNum: 'have a total of'
   },
   Shoppingcart: {
     ShoppingcartTitle: 'Shopping Cart ',
@@ -482,7 +489,7 @@ export default {
     AboutUS: 'About US',
     OurStores: 'OUR STORES',
     BusinessHours: 'Business Hours',
-    BigSales: 'BIG SALES',
+    BigSales: 'Products',
     WhatNews: 'WHAT’S NEWS',
     PlsChoose: 'Please click to select the content you want to view :'
   },
@@ -498,7 +505,7 @@ export default {
     }
   },
   home: {
-    News: 'News',
+    News: 'Latest News',
     More: 'More',
     Category: 'Category',
     Weaccept: 'We Accept',
@@ -516,9 +523,10 @@ export default {
     Search: 'Search Results',
     ReadMore: 'Read More',
     Activity: 'Activity',
-    ViewMore: 'ViewMore >',
-    Corporateenvironment: 'Corporate environment',
-    footercontact: 'Contact Us'
+    ViewMore: 'Learn More  >',
+    Corporateenvironment: 'Office Environment',
+    footercontact: 'Contact Us',
+    welcome: 'Welcome to Tein Shing Industrial (Hong Kong) Co., Ltd. We will be dedicated to serving you!'
   },
   Action: {
     ReturnHomePage: 'Return Homepage',
@@ -590,7 +598,7 @@ export default {
     CaseType: 'Case Type',
     Document: 'Document',
     MyAccount: 'My Account',
-    AddToEnquiry: 'Add To Enquiry',
+    AddToEnquiry: 'Add Quotation Query',
     YourRef: 'Your Ref.',
     ShippingInformation: 'Shipping Information',
     NegotiationBox: 'Negotiation Box',
@@ -675,7 +683,7 @@ export default {
     Balance: 'Balance',
     Norecord: ' You have no record !',
     Pleaseselect: 'Please select a product to delete',
-    MinOrderQty: 'Min. Order Qty',
+    MinOrderQty: 'Minimum order quantity',
     Code: 'Code',
     Type: 'Type',
     AuthorizedSignature: 'Authorized Signature',

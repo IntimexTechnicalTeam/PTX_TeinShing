@@ -98,12 +98,12 @@ ul,li{
           justify-content: center;
           color:#333;
           border-radius: 20px;
-          font-size: 1.6rem;
+          font-size: 1.4rem;
           height: 100%;
           text-transform:uppercase;
         }
         .router-link-active {
-          background: @base_color!important;
+          background: #de2910 !important;
           color: #fff!important;
         }
       }

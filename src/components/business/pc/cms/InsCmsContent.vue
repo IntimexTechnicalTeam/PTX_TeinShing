@@ -1,7 +1,7 @@
 <template>
   <div id="container" class="PcContact">
   <!-- 联络我们页面 -->
-    <div class="Cmsbg" v-if="NewcateId=='40112'">
+    <div class="Cmsbg" v-if="NewcateId=='40120'">
       <transition name="slide">
         <div key="1" v-if="!waiting" style="display:flex;">
            <div class="DetailTitle"><img :src="ImgList" v-show="ImgList!==null">
@@ -12,15 +12,28 @@
       <transition name="slide">
         <div class="faker" key="2" v-if="waiting" v-loading="true"></div>
       </transition>
+      <div class="tags-box fix">
+            <div class="Path_left">
+              <p class="PathData">
+                <router-link to="/" class="HomePath">{{$t('Message.HomeTips')}}</router-link>
+                <ul>
+                  <li v-for="(path,index) in PathData.CatPaths" :key="index">
+                    <i class="el-icon-arrow-right"></i><span class="currentTitle">{{path.PathName}}</span>
+                  </li>
+                </ul>
+              </p>
+            </div>
+          </div>
       <div class="CmsContent">
-        <div class="MapInfo">
+        <!-- <div class="MapInfo">
           <p class="OurStores">{{$t('Cms.OurStores')}}</p>
           <p class="BusinessHours">{{$t('Cms.BusinessHours')}}: 07:30 - 19:00</p>
           <p v-html="MapInfo" ></p>
-        </div>
+        </div> -->
+        <div class="left">
           <div class="CmsMap">
             <p v-html="content.Body" class="cmsbody"></p>
-            <p class="addressIcon"><i></i>{{$t('home.Address')}}：</p>
+            <!-- <p class="addressIcon"><i></i>{{$t('home.Address')}}：</p>
             <div class="addressBox">
             <div class="perList" v-for="(val,index) in ShopList" :key="index" v-on:click="showContent(val.Id,index)" :class="{'activeColor':cindex==index}">
                 <div class="icon"><i></i></div>
@@ -30,19 +43,26 @@
                   <p>{{val.DescTwo}}</p>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
+        </div>
+        <div class="right">
+          <div class="FormMain">
+            <!-- <p class="FormTitle">{{FormTitle}}</p> -->
+            <div v-html="htmlString" class="to_vertical" id="content"></div>
+            <div id="preview" style="display:none;"></div>
+          </div>
+
+        </div>
+
          <div class="clear"></div>
       </div>
-      <div class="borderline"></div>
-        <div class="FormMain">
-          <p class="FormTitle">{{FormTitle}}</p>
-          <div v-html="htmlString" class="to_vertical" id="content"></div>
-          <div id="preview" style="display:none;"></div>
+      <div class="maps">
+          <p v-html="mapcontent.Body"></p>
         </div>
     </div>
     <!-- 其他页面 -->
-    <div class="CmsNormal" v-if="NewcateId!='40112'">
+    <div class="CmsNormal" v-if="NewcateId!='40120'">
       <transition name="slide">
         <div key="1" v-if="!waiting" style="display:flex;">
             <div class="DetailTitle"><img :src="ImgList" v-show="ImgList!==null">
@@ -107,6 +127,7 @@ export default class InsCmsContent extends Vue {
   OtherPageImg:string='';
   TitleName:string='';
   PathData: string='';
+  mapcontent:string='';
   getForm () {
     this.$Api.regAndPay.getHtml('ContactUs', this.lang, false).then(result => {
       this.htmlString = result.HtmlString;
@@ -199,9 +220,10 @@ export default class InsCmsContent extends Vue {
     this.getIndexshop();
     this.showContent(20288, 0);
     this.Regnay();
+    this.getmaps();
   }
   getContent () {
-    this.$Api.cms.getContentByDevice({ Key: this.id, ContentId: this.id, IsMobile: true }).then(result => {
+    this.$Api.cms.getContentByDevice({ Key: this.id, ContentId: this.id, IsMobile: false }).then(result => {
     this.content = result.CMS;
     this.TitleName = result.CMS.Title;
     this.OtherPageImg = result.CMS.Cover;
@@ -212,6 +234,11 @@ export default class InsCmsContent extends Vue {
     if (result.CMS.Title) document.title = result.CMS.Title;
   });
 }
+  getmaps () {
+    this.$Api.cms.getContentByDevice({ Key: 'maps', IsMobile: false }).then(result => {
+    this.mapcontent = result.CMS;
+  });
+  }
   // 根据设备类型获取CMSCategory信息
   getCategoryByDevice (cateId) {
       this.$Api.cms.getCategoryByDevice({ CatId: cateId, IsMobile: false }).then(async (result) => {
@@ -275,33 +302,6 @@ export default class InsCmsContent extends Vue {
     &:last-child{
       border-bottom: 1px solid #000;
     }
-    .icon1{
-      background: url('/images/mobile/Mobile-Contact-02.png') no-repeat center center;
-      background-size: 100%;
-      width: 2rem;
-      height: 2rem;
-      display: inline-block;
-      vertical-align: middle;
-      margin-right:.5rem;
-    }
-    .icon2{
-      background: url('/images/mobile/Mobile-Contact-03.png') no-repeat center center;
-      background-size: 100%;
-      width: 2rem;
-      height: 2rem;
-      display: inline-block;
-      vertical-align: middle;
-      margin-right:.5rem;
-    }
-    .icon3{
-      background: url('/images/mobile/Mobile-Contact-04.png') no-repeat center center;
-      background-size: 100%;
-      width: 2rem;
-      height: 2rem;
-      display: inline-block;
-      vertical-align: middle;
-      margin-right:.5rem;
-    }
   }
 }
 .PcContact  .MapInfo{
@@ -327,11 +327,11 @@ export default class InsCmsContent extends Vue {
   }
 }
 .PcContact .FormMain{
-  width:1200px;
+  width:100%;
   margin:0 auto;
   padding-bottom: 3rem;
   position: relative;
-  padding-top: 3rem;
+  // padding-top: 3rem;
   .FormTitle{
     font-size: 40px;
     margin-top: 20px;
@@ -339,7 +339,7 @@ export default class InsCmsContent extends Vue {
     color:#333333;
   }
   #preview{
-    width: 80%;
+    width: 100%;
     float:right;
     .anwer{
       margin-bottom: 20px;
@@ -373,72 +373,80 @@ export default class InsCmsContent extends Vue {
     }
   }
   .btn-default{
-      width: 20%;
-      float: right;
-      background: #666666;
-      height: 3.5rem;
-      line-height: 3.5rem;
+      width: 100%;
+      // float: right;
+      background: #de2910;
+      height: 45px;
+      line-height: 45px;
       color:#fff;
       background-size: 100%;
       border:none;
-      margin-top: 1rem;
-      font-size: 1.4rem;
-      margin-bottom: 5rem;
+      margin-top: 15px;
+      font-size: 20px;
+      // margin-bottom: 5rem;
       border-radius: 2px;
   }
   #Anwers{
     position: relative;
   .form-group{
-    width: 50%;
-    display: inline-block;
-    &:nth-child(3){
-      position: absolute;
-      width: 50%;
-      right: 0px;
-      top:0px;
-    }
+    width: 100%;
+    display: block;
+    // &:nth-child(3){
+    //   position: absolute;
+    //   width: 50%;
+    //   right: 0px;
+    //   top:0px;
+    // }
     .fieldset{
       border:none;
       padding: 0px;
     }
     h4{
       background: #fff;
-      background-size: 100% 100%;
-      display: inline-block;
-      height: 3.5rem;
-      width: 40%;
-      text-align: center;
-      line-height: 3.5rem;
-      font-size: 1.2rem;
-      margin-bottom: .5rem;
-      border:1px solid #808080;
-      border-radius: 2px;
+    background-size: 100% 100%;
+    display: block;
+    text-align: left;
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #666666;
+    font-weight: 500;
+
     }
     input[type="text"],input[type="email"]{
-      border:1px solid #808080;
-      height: 3.5rem;
-      line-height: 3.5rem;
-      width: 70%;
+      border:1px solid #e6e6e6;
+      height: 45px;
+      line-height: 45px;
+      width: 100%;
       box-sizing: border-box;
       border-radius: 2px;
-      margin-bottom: .5rem;
+      margin-bottom: 10px;
       text-indent: 1rem;
       outline: none;
-      font-size: 1.4rem;
+      font-size: 18px;
+      &:focus{
+        border: 1px solid #de2910;
+      }
     }
     textarea{
-      border:1px solid #808080;
-      height: 12rem;
+      border:1px solid #e6e6e6;
+      height: 10rem;
       width: 100%;
       box-sizing: border-box;
       border-radius: 2px;
       margin-bottom: .5rem;
       outline: none;
-      font-size: 1.4rem;
+      font-size: 18px;
+      // text-indent: 1rem;
+      padding: 10px;
+      padding-left: 1rem;
+      &:focus{
+        border: 1px solid #de2910;
+      }
     }
     p[name="error"]{
       color:red;
       margin-bottom:.5rem;
+      font-size: 12px;
     }
   }
  }
@@ -528,6 +536,44 @@ export default class InsCmsContent extends Vue {
       }
     }
   }
+  .left{
+    float: left;
+    width: 600px;
+    text-align: center;
+    ul{
+      li{
+        margin-bottom: 35px;
+        .text{
+              display: flex;
+              align-items: center;
+              font-size: 20px;
+              color: #2f4858;
+              font-weight: bold;
+              margin-bottom: 15px;
+              justify-content: center;
+              img{
+                margin-right: 10px;
+              }
+          }
+          p{
+            font-size: 20px;
+            color: #666666;
+          }
+        }
+      }
+  }
+  .right{
+    float: left;
+    width: 600px;
+  }
+}
+.maps{
+  width: 100%;
+  height: 400px;
+  margin-bottom: 10px;
+  iframe{
+    border: none;
+  }
 }
 </style>
 <style scoped lang="less">
@@ -599,11 +645,10 @@ export default class InsCmsContent extends Vue {
 }
 .Cmsbg{
     width:100%;
-    background: url('/images/pc/pccontact_01.jpg') no-repeat center center;
+    // background: url('/images/pc/pccontact_01.jpg') no-repeat center center;
     background-size:100% 100%;
     display: block;
     box-sizing: border-box;
-    display: inline-block;
     .borderline{
       height:1px;
       width: 100%;
@@ -627,12 +672,12 @@ export default class InsCmsContent extends Vue {
   height: 20rem;
 }
 .CmsMap {
-    width: 50%;
+    width: 100%;
     float: left;
-    margin-left: 5%;
+    // margin-left: 5%;
     display: flex;
     flex-wrap: wrap;
-    padding-top: 5rem;
+    // padding-top: 5rem;
     .cmsbody{
       width:100%;
     }

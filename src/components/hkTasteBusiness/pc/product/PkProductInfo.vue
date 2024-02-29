@@ -7,10 +7,10 @@
               <div class="in_panel_subTitle"  v-if="panelDetail.negotiable == false || panelDetail.negotiable == null"><inPrices :primePrices="panelDetail.ListPrice+AddPrice" :currentPrices="panelDetail.SalePrice+AddPrice"  :currency="panelDetail.Currency" :DefaultListPrice="panelDetail.DefaultListPrice+AddPrice" :DefaultSalePrice="panelDetail.DefaultSalePrice+AddPrice" :DefaultCurrency="panelDetail.DefaultCurrency" size="huge" :heightLine="true" styla="margin: 1rem 0;" :max="panelDetail.MaxPurQty" :min="panelDetail.MinPurQty"></inPrices></div>
               <div class="in_panel_subTitle"  v-if="panelDetail.negotiable == true && panelDetail.negotiateMinQty > panelDetail.MinPurQty"><inPrices :primePrices="panelDetail.ListPrice+AddPrice" :currentPrices="panelDetail.SalePrice+AddPrice"  :currency="panelDetail.Currency" :DefaultListPrice="panelDetail.DefaultListPrice+AddPrice" :DefaultSalePrice="panelDetail.DefaultSalePrice+AddPrice" :DefaultCurrency="panelDetail.DefaultCurrency" size="huge" :heightLine="true" styla="margin: 1rem 0;" :max="panelDetail.MaxPurQty" :min="panelDetail.MinPurQty"></inPrices></div>
             </div>
-            <div class="rightpart" v-if="this.$Settings.version !== 1">
+            <!-- <div class="rightpart" v-if="this.$Settings.version !== 1">
               <div class="in_pannel_addtofav"  v-if="!panelDetail.negotiable"><img :src="panelDetail.IsFavorite ? '/images/mobile/faved.png': '/images/mobile/unfav.png'" @click="addFavorite"/>{{$t('Message.Fav')}}</div>
               <p class="HkProductShare"><HkProductShare></HkProductShare>{{$t("Action.Share")}}</p>
-            </div>
+            </div> -->
         </div>
     </div>
   <div class="productRart" v-if="!panelDetail.negotiable || panelDetail.negotiable == null">
@@ -18,13 +18,13 @@
         <p class="ProductCode">{{$t("product.ProductCode")}}:{{panelDetail.Code}}</p>
         <p class="productItr" v-html="panelDetail.OverView"></p>
   </div>
-    <div class="in_unitInfo" v-if="panelDetail.UnitInfo.Desc!==null">{{$t('product.Unit')}}:{{panelDetail.UnitInfo.Desc}}</div>
+    <!-- <div class="in_unitInfo" v-if="panelDetail.UnitInfo.Desc!==null">{{$t('product.Unit')}}:{{panelDetail.UnitInfo.Desc}}</div> -->
     <div class="productPtx"  v-if="panelDetail.negotiable ">
         <div class="productInfo">
           <p class="TitleBg"><span>{{$t('Message.ProductInformation')}}</span></p>
           <div class="InnerTable">
-            <p class="perline"><span class="left">{{$t('Enquiry.MinOrderQty')}}</span><span class="right">{{panelDetail.MinPurQty}}</span></p>
-            <p class="perline"><span class="left">{{$t('Enquiry.negotiateMinQty')}}</span><span class="right">{{panelDetail.negotiateMinQty}}</span></p>
+            <p class="perline"><span class="left">{{$t('Enquiry.MinOrderQty')}}</span><span class="right">{{panelDetail.MinPurQty}} (pcs)</span></p>
+            <!-- <p class="perline"><span class="left">{{$t('Enquiry.negotiateMinQty')}}</span><span class="right">{{panelDetail.negotiateMinQty}}</span></p> -->
             <p class="perline"><span class="left">{{$t("product.ProductCode")}}</span><span class="right">{{panelDetail.Code}}</span></p>
             <p class="perline"><span class="left">{{$t('Message.Catalog')}}</span>
             <span class="right">
@@ -130,7 +130,11 @@ export default class PkProductInfo extends Vue {
     width:75%;
     float: left;
     font-size: 26px;
-    padding-top: .5rem;
+    // padding-top: .5rem;
+    margin-bottom: 30px;
+    p{
+      font-size: 26px;
+    }
 }
 .in_panel_product .ProductCode .rightpart{
     width: 23%;
@@ -162,37 +166,47 @@ export default class PkProductInfo extends Vue {
 .productInfo {
   width: 100%;
   display: inline-block;
-  margin-bottom: 1rem;
+  margin-bottom: 24px;
   .TitleBg {
-    height: 3rem;
-    line-height: 3rem;
-    background: #cab597;
+    height: 40px;
+    line-height: 40px;
+    background: #f5f5f5;
+    border-radius: 3px;
+    overflow: hidden;
     span {
-      width: 90%;
+      // width: 90%;
       margin: 0 auto;
-      font-size:22px;
-      display: flex;
+      font-size:18px;
+      display: inline-block;
       flex-wrap: wrap;
       color: #fff;
+      background-color: #2f4858;
+      padding: 0 24px;
     }
   }
   .InnerTable {
-    width: 90%;
+    width: 93%;
     margin: 0 auto;
     .perline {
       width: 100%;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
-      margin-top: 1rem;
+      // justify-content: space-between;
+      margin-top: 24px;
       .left{
-        width: 48%;
-        font-size:20px;
+        width: 40%;
+        font-size:18px;
+        color: #2f4858;
       }
       .right {
         width: 48%;
-        font-size:20px;
-        color:#333;
+        font-size:18px;
+        color:#999999;
+        span:last-child{
+          a{
+            color: #de2910;
+          }
+        }
       }
     }
   }
@@ -244,12 +258,12 @@ export default class PkProductInfo extends Vue {
   color: @base_color;
 }
 .NormalColor {
-  color: #333;
+  color: #999999;
 }
 .Specification {
   /deep/ p {
-    font-size: 20px!important;
-    color:#2c3e50!important;
+    font-size: 18px!important;
+    color:#2f4858!important;
     line-height: 30px;
     height: 90px;
     word-break:break-all;
@@ -259,8 +273,8 @@ export default class PkProductInfo extends Vue {
     overflow:hidden;
   }
   /deep/ span {
-    font-size: 20px!important;
-    color:#2c3e50!important;
+    font-size: 18px!important;
+    color:#2f4858!important;
   }
 }
 .HkProductShare {

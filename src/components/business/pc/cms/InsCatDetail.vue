@@ -1,24 +1,26 @@
 <template>
-  <div id="container" class="catDetail">
+  <div id="container" class="catDetail" :class="{'ENG':$Storage.get('locale') === 'E'}">
     <transition name="slide">
-      <div key="1" v-if="!waiting" style="display:flex;">
+      <div key="1" v-if="!waiting">
         <div class="BannerImg">
             <img :src="BannerImg" v-show="BannerImg!==null">
         </div>
+        <div class="catContent">
+            <ins-cat-layout2 :catData="cmsCatTree" :cmsData="contentList" @changeCatSelect="changeCatSelect" v-if="cmsCategory.PageStyle === '0' || cmsCategory.PageStyle === '1'" />
+
+            <ins-cat-layout1 v-if="cmsCategory.PageStyle === '2'"/>
+
+            <ins-cat-layout3 :cmsData="contentList" v-if="cmsCategory.PageStyle === '3'" />
+
+            <ins-cat-layout4 :cmsData="contentList" :tabData="TabData" :pager="pager" v-if="cmsCategory.PageStyle === '4'" />
+        </div>
       </div>
+
     </transition>
     <transition name="slide">
         <div class="faker" key="2" v-if="waiting" v-loading="true"></div>
     </transition>
-    <div class="catContent">
-        <ins-cat-layout1 v-if="cmsCategory.PageStyle === '0' || cmsCategory.PageStyle === '1'"/>
 
-        <ins-cat-layout2 :catData="cmsCatTree" :cmsData="contentList" @changeCatSelect="changeCatSelect" v-if="cmsCategory.PageStyle === '2'" />
-
-        <ins-cat-layout3 :cmsData="contentList" v-if="cmsCategory.PageStyle === '3'" />
-
-        <ins-cat-layout4 :cmsData="contentList" :tabData="TabData" :pager="pager" v-if="cmsCategory.PageStyle === '4'" />
-    </div>
   </div>
 </template>
 
@@ -41,7 +43,7 @@ export default class insNews extends Vue {
     PageStyle: string = '0'; // catDetail页面类型
     pager: any = {
       currentPage: 1, // 当前页
-      pageSize: 12, // 每页显示条目个数
+      pageSize: 3, // 每页显示条目个数
       totalRecord: 0 // 总条目数
     }
     private waiting: boolean = true;
@@ -52,8 +54,11 @@ export default class insNews extends Vue {
       this.$Api.cms.getCategoryByDevice({ CatId: this.id, IsMobile: false }).then((result) => {
         this.cmsCategory = result;
         this.PageStyle = result.PageStyle;
-        this.BannerImg = result.ImagePath;
-        this.waiting = false;
+
+        setTimeout(() => {
+          this.waiting = false;
+        }, 2000);
+        console.log(result, '图片路径');
         switch (result.PageStyle) {
             case '2':
               this.getCategoryTree();
@@ -65,7 +70,7 @@ export default class insNews extends Vue {
               this.getContentsByCatId();
               break;
         }
-
+        this.getArgument(result.CatPaths[0].CatId);
         this.$nextTick(() => {
           if (result.Name) document.title = result.Name;
           (document.getElementsByName('keywords')[0] as any).content = result.SeoKeyword;
@@ -88,6 +93,7 @@ export default class insNews extends Vue {
         if (result && result.length) {
           this.cmsCatTree = result;
           this.catId = result[0].Id;
+
           this.getContentsByCatId();
         } else {
           this.getContentsByCatId();
@@ -101,7 +107,7 @@ export default class insNews extends Vue {
       this.$Api.cms.getContentsByCatId(catId, this.pager.currentPage, this.pager.pageSize).then((result) => {
         this.contentList = result.Data;
         console.log(result, '拿到数据');
-        this.getArgument(result.Data[0].Category.ParentId);
+
         result.Data.forEach(function (i) {
           var newDate = new Date(i.CreateDate.replace(/-/g, '/'));
           i.CreateDate = newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate();
@@ -114,6 +120,7 @@ export default class insNews extends Vue {
     this.$Api.cms.getCategoryByDevice({ CatId: v, IsMobile: false }).then(async (result) => {
       console.log(result, '是不是拿到父级ID');
       this.TabData = result;
+      this.BannerImg = result.ImagePath;
     }).catch((error) => {
       console.log(error, 'error');
       this.$message({
@@ -173,6 +180,28 @@ export default class insNews extends Vue {
   img{
     width: 100%;
     display: block;
+  }
+}
+.faker{
+  min-height: 26rem;
+}
+#container.ENG{
+  /deep/ .NomralBg{
+    .tags_right{
+      ul{
+        li{
+          a{
+            padding: 7px;
+              width: 104px;
+              text-align: center;
+              height: auto;
+          }
+        }
+      }
+    }
+    .tags-box .Path_left .PathData{
+      height: 56px;
+    }
   }
 }
 </style>

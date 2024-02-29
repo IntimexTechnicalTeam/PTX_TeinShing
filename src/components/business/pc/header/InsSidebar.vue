@@ -7,19 +7,19 @@
       <!-- <a href="javascript:void(0);" @click="show = !show"
         ><img src="/static/Image/mobile/home/down2.png"
       /></a> -->
-      <span v-show="show">
+      <span>
         <a
-          href="https://api.whatsapp.com/send?phone=8529876%205436&text=%E6%88%91%E6%83%B3%E6%9F%A5%E8%AF%A2%E4%B8%80%E4%B8%8B"
+          href="https://api.whatsapp.com/send?phone=85292383723&text=%E6%88%91%E6%83%B3%E6%9F%A5%E8%AF%A2%E4%B8%80%E4%B8%8B"
           target="_blank"
           ><img src="/static/Image/mobile/home/whatsapp.png"
         /></a>
         <!-- <a href="javascript:;" class="livechat" @click="showLivechat"
           ><img src="/static/Image/mobile/home/facebook.png"
         /></a> -->
-        <a href="tel:85298765436" class="fb-button" target="_blank"
+        <a href="tel:85292383723" class="fb-button" target="_blank"
           ><img src="/static/Image/mobile/home/phone.png"
         /></a>
-        <a href="mailto:info@hktaste.com.hk" class="fb-button"
+        <a href="mailto:huizhoutiancheng@163.com" class="fb-button"
           ><img src="/static/Image/mobile/home/news.png"
         /></a>
       </span>
@@ -138,7 +138,7 @@ export default class InsSidebar extends Vue {
   position: fixed;
   right: 0 !important;
   bottom: 60px;
-  width: 4rem;
+  width: 50px;
   z-index: 1000000;
   line-height: 0;
 }
@@ -159,13 +159,7 @@ export default class InsSidebar extends Vue {
   -moz-box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
   -o-box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
 }
-@media screen and (max-width: 768px) {
-  .fb-widget {
-    width: 300px;
-    height: 500px;
-    right: 5rem;
-  }
-}
+
 .fb-credit {
   text-align: center;
   margin-top: 8px;
@@ -215,12 +209,14 @@ export default class InsSidebar extends Vue {
 }
 #sidebar {
   img {
-    width: 4rem;
+    width: 50px;
+    display: block;
+    border-radius: 50%;
   }
   position: fixed;
-  right: 28px!important;
+  right: 10px!important;
   bottom: 100px;
-  width: 60px;
+  width: 50px;
   z-index: 997;
   line-height: 0;
 }
@@ -241,5 +237,21 @@ export default class InsSidebar extends Vue {
 }
 a {
   line-height: 0;
+}
+@media screen and (max-width: 768px) {
+  .fb-widget {
+    width: 300px;
+    height: 500px;
+    right: 5rem;
+  }
+  .siderbarContainer #sidebar{
+    right: 0.5rem!important;
+    bottom: 5rem;
+    width: 4rem;
+    img{
+      width: 4rem;
+      display: block;
+    }
+  }
 }
 </style>

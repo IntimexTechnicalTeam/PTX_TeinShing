@@ -17,7 +17,7 @@
         </li>
       </ul>
       <div class="more">
-        <a href="/cms/catDetail/40118">{{ $t("home.ViewMore") }}</a>
+        <a href="/cms/catDetail/40124">{{ $t("home.ViewMore") }}</a>
       </div>
     </div>
   </div>
@@ -42,7 +42,7 @@ export default class PkLiveBox extends Vue {
     return this.$store.state.isMobile;
   }
   getadvantage () {
-    this.$Api.cms.getFromContentByCatId(40118, this.pager.currentPage, this.pager.pageSize, this.isMobile, this.SortName, this.SortOrder).then(result => {
+    this.$Api.cms.getFromContentByCatId(40124, this.pager.currentPage, this.pager.pageSize, this.isMobile, this.SortName, this.SortOrder).then(result => {
         this.contentList = result.Data;
         this.conetntTitle = result.Data[1].Category.Name;
         console.log(result, 'result.Data');
@@ -98,6 +98,7 @@ export default class PkLiveBox extends Vue {
         color: #2f4858;
         position: relative;
         text-align: center;
+        letter-spacing: 2px;
       }
     }
     ul{

@@ -18,7 +18,7 @@
           <p class="TitleBg"><span>{{$t('Message.ProductInformation')}}</span></p>
           <div class="InnerTable">
             <p class="perline"><span class="left">{{$t('Enquiry.MinOrderQty')}}</span><span class="right">{{panelDetail.MinPurQty}}</span></p>
-            <p class="perline"><span class="left">{{$t('Enquiry.negotiateMinQty')}}</span><span class="right">{{panelDetail.negotiateMinQty}}</span></p>
+            <!-- <p class="perline"><span class="left">{{$t('Enquiry.negotiateMinQty')}}</span><span class="right">{{panelDetail.negotiateMinQty}}</span></p> -->
             <p class="perline"><span class="left">{{$t("product.ProductCode")}}</span><span class="right">{{panelDetail.Code}}</span></p>
             <p class="perline"><span class="left">{{$t('Message.Catalog')}}</span>
             <span class="right">
@@ -131,6 +131,7 @@ export default class PkProductInfo extends Vue {
         display: flex;
         flex-wrap: wrap;
         font-size: 1.6rem;
+        color: #2f4858;
       }
     .in_panel_subTitle{
       position: relative;
@@ -174,14 +175,16 @@ export default class PkProductInfo extends Vue {
   .TitleBg {
     height: 3rem;
     line-height: 3rem;
-    background: #cab597;
+    background: #f5f5f5;
     span {
-      width: 90%;
-      margin: 0 auto;
-      font-size: 1.4rem;
-      display: flex;
+      width: 12rem;
+      // margin: 0 auto;
+      font-size: 1.3rem;
+      display: block;
       flex-wrap: wrap;
       color: #fff;
+      background-color: #2f4858;
+      text-align: center;
     }
   }
   .InnerTable {
@@ -196,10 +199,12 @@ export default class PkProductInfo extends Vue {
       .left{
         width: 48%;
         font-size: 1.2rem;
+        color: #2f4858;
       }
       .right {
         width: 48%;
         font-size: 1.2rem;
+        color: #999999;
       }
     }
   }
